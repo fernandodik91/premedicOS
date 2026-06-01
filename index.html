@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
+<!-- ===== Meta Pixel - VIVANTE ===== -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '1312835947705456');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1312835947705456&ev=PageView&noscript=1"
+/></noscript>
+<!-- ===== Fin Meta Pixel - VIVANTE ===== -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>VIVANTE · Plan por Aportes PreMedic en Mendoza | Obra social con tus aportes</title>
@@ -94,6 +112,7 @@
   --bg-light:       #FAFBFB;
   --bg-cream:       #F2F6F5;
   --bg-white:       #FFFFFF;
+  --bg-featured:    #F5FAF9;
   --page-surface:   #F2F6F5;
 
   /* Text */
@@ -141,31 +160,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-}
-
-/* ─── Atmósfera de página única ───────────────────────────────
-   Capa fija detrás de todo el contenido: resplandores teal muy
-   suaves repartidos + grano finito. Da textura y profundidad sin
-   un patrón visible. Hero y footer (oscuros) la tapan con su
-   propio fondo; las secciones intermedias son transparentes. */
-.page-atmosphere {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 70% 50% at 12% 8%,  rgba(63,169,159,0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 45% at 88% 30%, rgba(45,136,128,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 55% at 20% 62%, rgba(126,200,191,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 65% 50% at 92% 88%, rgba(45,136,128,0.06) 0%, transparent 60%);
-}
-.page-atmosphere::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
-  opacity: 0.05;
-  mix-blend-mode: multiply;
 }
 
 /* El contenido se apoya por encima de la atmósfera */
@@ -312,7 +306,7 @@ img, video { max-width: 100%; display: block; }
 .header-cta {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 11px 22px;
-  border-radius: 100px;
+  border-radius: 6px;
   background: var(--text-on-dark);
   color: var(--bg-hero);
   font-weight: 500; font-size: 13px;
@@ -418,61 +412,48 @@ img, video { max-width: 100%; display: block; }
   position: relative;
   z-index: 3;
   flex: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.95fr);
-  gap: 64px;
+  display: flex;
   align-items: center;
   max-width: 1280px;
   margin: 0 auto;
   width: 100%;
 }
-.hero-text { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
-.hero-aside { display: flex; justify-content: flex-end; }
+.hero-text { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; max-width: 820px; }
 
-/* Institutional seal — refined as plaque */
-.hero-seal {
-  display: inline-flex;
+/* Hero typographic credential line */
+.hero-credentials {
+  display: flex;
   align-items: center;
-  gap: 18px;
-  margin-bottom: 56px;
-  padding: 10px 18px 10px 12px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border-on-dark);
-  border-radius: 100px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  align-self: flex-start;
-  animation: heroIn 1.1s var(--ease-cinematic) 0.2s both;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  gap: 24px;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  animation: heroIn 1.3s var(--ease-cinematic) 1.0s both;
 }
-.hero-seal-logo {
-  height: 28px;
-  width: auto;
-  filter: brightness(0) invert(1);
-  opacity: 0.92;
-}
-.hero-seal-logo-fallback {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 18px;
-  color: var(--text-on-dark);
-  letter-spacing: 0.01em;
-  padding-right: 4px;
-}
-.hero-seal-divider { width: 1px; height: 18px; background: var(--border-on-dark-2); }
-.hero-seal-text { display: flex; flex-direction: column; gap: 2px; }
-.hero-seal-label {
-  font-family: var(--font-mono);
-  font-size: 10px; font-weight: 500;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: var(--teal-light);
-}
-.hero-seal-title {
-  font-size: 12.5px;
+.hero-credential {
+  font-size: 11.5px;
   font-weight: 400;
-  color: var(--text-on-dark-soft);
-  letter-spacing: 0.005em;
+  color: var(--text-on-dark-mute);
+  letter-spacing: 0.12em;
+  font-variant: all-small-caps;
+}
+.hero-credential-sep {
+  width: 1px;
+  height: 14px;
+  background: rgba(255,255,255,0.16);
+  flex-shrink: 0;
+}
+
+/* Word-split hero animation */
+.word-split { overflow: hidden; display: inline; }
+.word-split .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: wordIn 0.55s var(--ease-cinematic) both;
+}
+@keyframes wordIn {
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .hero h1.h-display {
@@ -511,9 +492,9 @@ img, video { max-width: 100%; display: block; }
 /* Buttons */
 .btn {
   display: inline-flex; align-items: center; gap: 10px;
-  padding: 17px 28px;
-  border-radius: 100px;
-  font-weight: 500; font-size: 14px;
+  padding: 16px 28px;
+  border-radius: 6px;
+  font-weight: 400; font-size: 14px;
   letter-spacing: 0.005em;
   cursor: pointer; white-space: nowrap;
   font-family: var(--font-body);
@@ -555,8 +536,6 @@ img, video { max-width: 100%; display: block; }
   background: rgba(255,255,255,0.03);
   color: var(--text-on-dark);
   border: 1px solid var(--border-on-dark-2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 .btn-secondary:hover {
   border-color: rgba(185,229,223,0.35);
@@ -567,93 +546,21 @@ img, video { max-width: 100%; display: block; }
 .btn svg { width: 16px; height: 16px; flex-shrink: 0; transition: transform 0.3s var(--ease-out); }
 .btn:hover svg.arrow { transform: translateX(4px); }
 
-.hero-stat {
-  display: flex; flex-direction: column; gap: 14px;
-  width: 100%;
-  max-width: 380px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.015) 100%);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(185,229,223,0.18);
-  border-radius: 22px;
-  padding: 28px 30px;
-  box-shadow:
-    var(--elev-dark-2),
-    0 0 0 1px rgba(185,229,223,0.04);
-  animation: heroIn 1.4s var(--ease-cinematic) 1s both;
-  color: inherit;
-  transition: transform 0.5s var(--ease-cinematic),
-              border-color 0.4s, box-shadow 0.5s;
-  position: relative;
-  overflow: hidden;
-}
-.hero-stat::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
+/* Scroll progress indicator */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(185,229,223,0.4), transparent);
+  background: var(--teal-main);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 200;
+  transition: transform 0.1s linear;
+  pointer-events: none;
 }
-.hero-stat:hover {
-  transform: translateY(-4px);
-  border-color: rgba(185,229,223,0.40);
-  box-shadow:
-    0 20px 56px rgba(0,0,0,0.50),
-    0 0 0 1px rgba(185,229,223,0.18),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-}
-.hero-stat-header { display: flex; align-items: center; gap: 10px; }
-.hero-stat-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: #4ADE80;
-  box-shadow: 0 0 0 3px rgba(74,222,128,0.18), 0 0 12px rgba(74,222,128,0.5);
-  animation: pulseDot 2.8s var(--ease-cinematic) infinite;
-  will-change: transform, opacity;
-}
-@keyframes pulseDot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.55; transform: scale(0.82); }
-}
-.hero-stat-label {
-  font-family: var(--font-mono);
-  font-size: 10px; font-weight: 500;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--teal-light);
-}
-.hero-stat-value {
-  font-family: var(--font-display);
-  font-size: 64px;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -0.035em;
-  color: var(--text-on-dark);
-  display: flex; align-items: baseline; gap: 4px;
-}
-.hero-stat-suffix {
-  font-size: 0.28em;
-  color: var(--teal-light);
-  font-weight: 400;
-  font-style: italic;
-}
-.hero-stat-sub {
-  font-size: 12.5px;
-  color: var(--text-on-dark-soft);
-  font-weight: 400;
-  line-height: 1.55;
-}
-.hero-stat-cta {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border-on-dark);
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--teal-highlight);
-  letter-spacing: 0.005em;
-}
-.hero-stat-cta svg { width: 13px; height: 13px; transition: transform 0.3s var(--ease-out); }
-.hero-stat:hover .hero-stat-cta svg { transform: translateX(4px); }
+
+/* Magnetic button */
+.magnetic { display: inline-block; transition: transform 0.5s var(--ease-cinematic); }
 
 /* Scroll indicator — refined */
 @keyframes heroIn {
@@ -691,41 +598,44 @@ img, video { max-width: 100%; display: block; }
 
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  filter: blur(6px);
-  transition: opacity 0.9s var(--ease-cinematic),
-              transform 0.9s var(--ease-cinematic),
-              filter 0.9s var(--ease-cinematic);
-  will-change: opacity, transform, filter;
+  transform: translateY(18px);
+  transition: opacity 0.7s var(--ease-cinematic),
+              transform 0.7s var(--ease-cinematic);
+  will-change: opacity, transform;
 }
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.reveal-in {
+  opacity: 0;
+  transform: translateX(-14px);
+  transition: opacity 0.65s var(--ease-cinematic),
+              transform 0.65s var(--ease-cinematic);
+  will-change: opacity, transform;
 }
+.reveal-in.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-cinematic);
+}
+.reveal-fade.visible { opacity: 1; }
 
 .reveal-stagger > * {
   opacity: 0;
-  transform: translateY(28px);
-  filter: blur(5px);
-  transition: opacity 0.8s var(--ease-cinematic),
-              transform 0.8s var(--ease-cinematic),
-              filter 0.8s var(--ease-cinematic);
-  will-change: opacity, transform, filter;
+  transform: translateY(18px);
+  transition: opacity 0.65s var(--ease-cinematic),
+              transform 0.65s var(--ease-cinematic);
+  will-change: opacity, transform;
 }
-.reveal-stagger.visible > * {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
-}
-.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.06s; }
-.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.14s; }
-.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.22s; }
-.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.30s; }
-.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.38s; }
-.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.46s; }
-.reveal-stagger.visible > *:nth-child(7) { transition-delay: 0.54s; }
-.reveal-stagger.visible > *:nth-child(8) { transition-delay: 0.62s; }
+.reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.12s; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.19s; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.26s; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.33s; }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.40s; }
+.reveal-stagger.visible > *:nth-child(7) { transition-delay: 0.47s; }
+.reveal-stagger.visible > *:nth-child(8) { transition-delay: 0.54s; }
 
 /* ─── PROOF — Wall of proof ───────────────────────────────── */
 
@@ -748,91 +658,43 @@ img, video { max-width: 100%; display: block; }
 .proof-header p.lead { margin: 0 auto; color: var(--text-mid); }
 .proof-header p.lead strong { color: var(--text-dark); }
 
-.proof-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-  max-width: 1080px;
+.proof-editorial {
+  max-width: 960px;
   margin: 0 auto;
+  border-top: 1px solid var(--border-on-light);
 }
-
-.press-card {
-  background: var(--bg-white);
-  border-radius: 22px;
-  overflow: hidden;
-  display: flex; flex-direction: column;
-  transition: transform 0.6s var(--ease-cinematic),
-              box-shadow 0.6s var(--ease-cinematic);
-  box-shadow:
-    0 1px 2px rgba(0,0,0,0.10),
-    0 12px 32px rgba(0,0,0,0.16),
-    0 24px 56px rgba(0,0,0,0.10);
-  position: relative;
+.proof-cite {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--border-on-light);
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 64px;
+  align-items: baseline;
 }
-.press-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
-  pointer-events: none;
-  z-index: 2;
-}
-.press-card:hover {
-  transform: translateY(-8px);
-  box-shadow:
-    0 1px 2px rgba(0,0,0,0.10),
-    0 24px 56px rgba(0,0,0,0.28),
-    0 40px 80px rgba(0,0,0,0.18);
-}
-.press-card-image {
-  position: relative;
-  background: linear-gradient(180deg, #F4F4F4 0%, #ECECEC 100%);
-  overflow: hidden;
-}
-.press-card-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-/* Placeholder when image is missing */
-.press-card-image::before {
-  content: attr(data-placeholder);
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(20,33,31,0.30);
-  background: repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(20,33,31,0.04) 12px, rgba(20,33,31,0.04) 13px);
-  z-index: 0;
-}
-.press-card-image img { position: relative; z-index: 1; }
-.press-card-body { padding: 26px 30px 30px; position: relative; }
-.press-card-source { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-.press-card-source-name {
+.proof-cite-source {
   font-family: var(--font-display);
-  font-style: italic; font-weight: 400;
-  font-size: 22px;
-  color: var(--text-dark);
-  letter-spacing: -0.015em;
-}
-.press-card-source-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-soft); }
-.press-card-source-meta {
-  font-family: var(--font-mono);
-  font-size: 10.5px; font-weight: 500;
-  letter-spacing: 0.20em;
-  text-transform: uppercase;
-  color: var(--text-soft);
-}
-.press-card-title {
-  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(32px, 3.5vw, 48px);
   font-weight: 400;
-  font-size: 19px;
-  line-height: 1.4;
-  color: var(--text-mid);
-  letter-spacing: -0.005em;
+  color: var(--text-dark);
+  letter-spacing: -0.018em;
+  line-height: 1;
+}
+.proof-cite-quote {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-dark);
+  font-weight: 300;
+  margin-bottom: 14px;
+  max-width: 58ch;
+  text-wrap: pretty;
+}
+.proof-cite-meta {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-soft);
+  letter-spacing: 0.14em;
+  font-variant: all-small-caps;
 }
 
 .proof-footer {
@@ -867,155 +729,63 @@ img, video { max-width: 100%; display: block; }
 .versus-header .h-section { margin-bottom: 22px; color: var(--text-dark); }
 .versus-header p.lead { margin: 0 auto; color: var(--text-mid); }
 .versus-header p.lead strong { color: var(--text-dark); }
-.versus-grid {
+.versus-table {
+  max-width: 1040px;
+  margin: 0 auto;
+  border-top: 1px solid var(--border-on-light);
+}
+.versus-table-head {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 0;
-  align-items: stretch;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border-on-light);
+  padding: 32px 0 28px;
 }
-.versus-side {
-  padding: 52px 44px;
-  border-radius: 24px;
-  transition: transform 0.5s var(--ease-cinematic), border-color 0.4s, box-shadow 0.4s;
-  position: relative;
-  overflow: hidden;
-}
-/* Lado "Hoy" — el peor: tarjeta clara apagada, sin protagonismo */
-.versus-side-bad {
-  background: #FBFCFC;
-  border: 1px solid var(--border-on-light);
-  box-shadow: var(--elev-1);
-}
-.versus-side-bad:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--elev-2);
-}
-/* Lado bueno — destacado: tinte teal, borde teal, sombra teal */
-.versus-side-good {
-  background:
-    radial-gradient(ellipse 90% 70% at 20% 0%, rgba(126,200,191,0.16) 0%, transparent 60%),
-    linear-gradient(180deg, #FFFFFF 0%, #ECF7F5 100%);
-  border: 1.5px solid rgba(45,136,128,0.30);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,0.9) inset,
-    0 12px 32px rgba(45,136,128,0.12),
-    0 28px 64px rgba(45,136,128,0.10);
-  transform: scale(1.015);
-}
-.versus-side-good::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 8%; right: 8%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--teal-main), transparent);
-}
-/* Recommended badge over the good side */
-.versus-side-good::after {
-  content: 'Recomendado';
-  position: absolute;
-  top: -1px; right: 28px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: #FFFFFF;
-  background: var(--teal-main);
-  padding: 7px 14px;
-  border-radius: 0 0 10px 10px;
-  box-shadow: 0 4px 12px rgba(45,136,128,0.30);
-}
-.versus-side-good:hover {
-  border-color: rgba(45,136,128,0.45);
-  transform: scale(1.015) translateY(-4px);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,0.9) inset,
-    0 16px 40px rgba(45,136,128,0.16),
-    0 36px 80px rgba(45,136,128,0.12);
-}
-.versus-divider {
-  display: flex; align-items: center; justify-content: center;
-  padding: 0 28px;
-}
-.versus-divider-circle {
-  width: 60px; height: 60px;
-  border-radius: 50%;
-  background: var(--bg-white);
-  border: 1px solid var(--border-on-light);
-  display: flex; align-items: center; justify-content: center;
+.versus-col-label {
   font-family: var(--font-display);
-  font-style: italic; font-weight: 400;
-  font-size: 19px;
-  color: var(--teal-main);
-  box-shadow: var(--elev-2);
-}
-.versus-tag {
-  font-family: var(--font-mono);
-  font-size: 10px; font-weight: 500;
-  letter-spacing: 0.30em;
-  text-transform: uppercase;
-  margin-bottom: 22px;
-  display: inline-flex; align-items: center; gap: 10px;
-}
-.versus-tag::before {
-  content: '';
-  width: 18px; height: 1px;
-  background: currentColor;
-  opacity: 0.5;
-}
-.versus-side-bad .versus-tag { color: var(--text-soft); }
-.versus-side-good .versus-tag { color: var(--teal-main); }
-.versus-title {
-  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 26px);
   font-weight: 400;
-  font-size: clamp(24px, 2.4vw, 30px);
-  line-height: 1.18;
-  letter-spacing: -0.015em;
-  margin-bottom: 36px;
-  color: var(--text-dark);
-  text-wrap: balance;
+  line-height: 1.2;
+  letter-spacing: -0.012em;
 }
-.versus-title em { font-style: italic; font-weight: 400; }
-.versus-side-good .versus-title em { color: var(--teal-main); }
-.versus-side-bad .versus-title em { color: var(--text-soft); }
-.versus-list {
-  list-style: none;
-  display: flex; flex-direction: column;
-  gap: 18px;
+.versus-col-label.dim { color: var(--text-soft); }
+.versus-col-label.strong { color: var(--text-dark); font-style: italic; }
+.versus-col-label.strong em { color: var(--teal-main); }
+.versus-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border-on-light);
+  padding: 20px 0;
+  transition: background 0.3s var(--ease-out);
 }
-.versus-list li {
-  position: relative;
-  padding-left: 30px;
+.versus-row:hover { background: rgba(45,136,128,0.025); }
+.versus-cell {
   font-size: 14.5px;
-  line-height: 1.6;
-  font-weight: 400;
-  transition: transform 0.35s var(--ease-out), color 0.25s;
-}
-.versus-list li::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 11px;
-  width: 18px; height: 1px;
-  transition: width 0.4s var(--ease-cinematic), background 0.25s;
-}
-.versus-side-bad .versus-list li { color: var(--text-mid); }
-.versus-side-bad .versus-list li::before { background: var(--text-soft); }
-.versus-side-good .versus-list li { color: var(--text-dark); }
-.versus-side-good .versus-list li::before { background: var(--teal-main); }
-.versus-side-good .versus-list li:hover { transform: translateX(6px); color: var(--teal-dark); }
-.versus-side-good .versus-list li:hover::before { width: 24px; }
-.versus-footnote {
-  margin-top: 32px;
-  padding: 18px 20px;
-  background: rgba(45,136,128,0.06);
-  border: 1px solid rgba(45,136,128,0.14);
-  border-radius: 14px;
-  font-size: 12.5px;
-  color: var(--text-mid);
   line-height: 1.65;
-  font-style: italic;
+  padding: 0 20px 0 0;
+  transition: transform 0.3s var(--ease-cinematic);
 }
-.versus-footnote strong { color: var(--teal-dark); font-style: normal; font-weight: 500; }
+.versus-cell.dim { color: var(--text-soft); opacity: 0.65; }
+.versus-cell.strong { color: var(--text-dark); font-weight: 400; }
+.versus-cell.strong::before {
+  content: '';
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--teal-main);
+  margin-right: 10px;
+  vertical-align: middle;
+  position: relative; top: -1px;
+}
+.versus-row:hover .versus-cell.strong { transform: translateX(4px); }
+.versus-footnote-row {
+  padding: 24px 0;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--text-mid);
+  font-style: italic;
+  max-width: 56ch;
+}
+.versus-footnote-row strong { color: var(--teal-dark); font-style: normal; font-weight: 500; }
 
 /* ─── WHY ─────────────────────────────────────────────────── */
 
@@ -1026,121 +796,52 @@ img, video { max-width: 100%; display: block; }
   background: radial-gradient(ellipse, rgba(63,169,159,0.10), transparent 60%);
   opacity: 1;
 }
-.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.why-card {
-  padding: 40px 34px;
-  background: var(--bg-white);
-  border-radius: 22px;
-  border: 1px solid var(--border-on-light);
-  box-shadow: var(--elev-1);
-  transition: transform 0.5s var(--ease-cinematic),
-              box-shadow 0.5s var(--ease-cinematic),
-              border-color 0.4s;
-  position: relative;
-  overflow: hidden;
+.why-list {
+  max-width: 960px;
+  margin: 0 auto;
+  border-top: 1px solid var(--border-on-light);
+}
+.why-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 48px;
+  padding: 52px 0;
+  border-bottom: 1px solid var(--border-on-light);
+  align-items: start;
+  transition: background 0.3s;
   cursor: default;
 }
-.why-card::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--teal-main), transparent);
-  opacity: 0;
-  transition: opacity 0.5s var(--ease-cinematic);
-}
-.why-card:hover {
-  transform: translateY(-8px);
-  box-shadow:
-    0 1px 2px rgba(45,136,128,0.04),
-    0 16px 40px rgba(45,136,128,0.14),
-    0 32px 64px rgba(45,136,128,0.08);
-  border-color: rgba(45,136,128,0.20);
-}
-.why-card:hover::after { opacity: 1; }
-.why-card-num {
+.why-row:hover { background: rgba(45,136,128,0.018); }
+.why-row-num {
   font-family: var(--font-display);
-  font-size: 17px; font-weight: 400;
-  color: var(--teal-main);
-  margin-bottom: 20px;
-  display: block;
-  letter-spacing: 0.02em;
   font-style: italic;
+  font-size: 17px;
+  color: var(--teal-main);
+  padding-top: 8px;
   transition: transform 0.4s var(--ease-cinematic);
+  letter-spacing: 0.01em;
 }
-.why-card:hover .why-card-num { transform: translateX(4px); }
-.why-card h3 {
+.why-row:hover .why-row-num { transform: translateX(5px); }
+.why-row-title {
   font-family: var(--font-display);
-  font-size: 24px;
+  font-size: clamp(22px, 2.2vw, 28px);
   font-weight: 400;
   line-height: 1.18;
   letter-spacing: -0.012em;
   color: var(--text-dark);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   text-wrap: balance;
 }
-.why-card h3 em { font-style: italic; color: var(--teal-main); font-weight: 400; }
-.why-card p { font-size: 14.5px; line-height: 1.7; color: var(--text-mid); font-weight: 400; }
-.why-card p strong { color: var(--text-dark); font-weight: 500; }
-
-.why-card-featured {
-  grid-column: span 2;
-  background:
-    linear-gradient(135deg, var(--bg-white) 0%, #EEF7F6 100%);
-  border: 1px solid rgba(45,136,128,0.18);
-  box-shadow:
-    0 1px 2px rgba(45,136,128,0.04),
-    0 12px 32px rgba(45,136,128,0.10),
-    0 24px 56px rgba(45,136,128,0.06);
-  padding: 52px 48px;
-  display: flex; flex-direction: column; justify-content: center;
-  min-height: 280px;
-  position: relative;
-  overflow: hidden;
+.why-row-title em { font-style: italic; color: var(--teal-main); font-weight: 400; }
+.why-row-desc {
+  font-size: 14.5px;
+  line-height: 1.72;
+  color: var(--text-mid);
+  font-weight: 300;
+  max-width: 60ch;
+  text-wrap: pretty;
 }
-.why-card-featured::before {
-  content: '';
-  position: absolute;
-  top: -30%; right: -10%;
-  width: 50%; height: 80%;
-  background: radial-gradient(ellipse, rgba(63,169,159,0.10), transparent 60%);
-  pointer-events: none;
-}
-.why-card-featured .why-card-num { font-size: 20px; }
-.why-card-featured h3 { font-size: clamp(28px, 2.6vw, 36px); line-height: 1.12; margin-bottom: 18px; }
-.why-card-featured p { font-size: 15.5px; line-height: 1.75; max-width: 54ch; }
-
-.why-card-pmc {
-  background: linear-gradient(180deg, var(--bg-white) 0%, #F4FAF9 100%);
-  border: 1px solid rgba(45,136,128,0.16);
-}
-.why-card-pmc::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--teal-main) 0%, var(--teal-light) 50%, var(--teal-main) 100%);
-  z-index: 1;
-}
-.why-card-pmc::after { display: none; }
-.why-card-pmc-tag {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 10px; font-weight: 500;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--teal-main);
-  background: rgba(45,136,128,0.08);
-  padding: 6px 14px;
-  border-radius: 100px;
-  margin-bottom: 18px;
-}
-.why-card-pmc-tag::before {
-  content: '';
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--teal-main);
-}
+.why-row-desc strong { color: var(--text-dark); font-weight: 400; }
 
 /* ─── NETWORK ─────────────────────────────────────────────── */
 
@@ -1167,79 +868,57 @@ img, video { max-width: 100%; display: block; }
 }
 .network-text strong { color: var(--text-dark); font-weight: 500; }
 
-.network-blocks { display: flex; flex-direction: column; gap: 24px; }
+.network-blocks { display: flex; flex-direction: column; gap: 0; }
 
-.network-block {
-  background: var(--bg-white);
-  border: 1px solid var(--border-on-light);
-  border-radius: 22px;
-  padding: 40px 40px;
-  box-shadow: var(--elev-1);
-  transition: box-shadow 0.5s var(--ease-cinematic),
-              transform 0.5s var(--ease-cinematic),
-              border-color 0.4s;
-  position: relative;
+.network-tier {
+  border-top: 1px solid var(--border-on-light);
+  padding: 44px 0;
 }
-.network-block:hover {
-  box-shadow:
-    0 1px 2px rgba(45,136,128,0.03),
-    0 12px 32px rgba(45,136,128,0.08),
-    0 24px 56px rgba(45,136,128,0.04);
-  transform: translateY(-3px);
-  border-color: rgba(45,136,128,0.16);
-}
-
-.network-block-featured {
-  background:
-    linear-gradient(135deg, var(--bg-white) 0%, #EEF7F6 100%);
-  border: 1px solid rgba(45,136,128,0.22);
-  box-shadow:
-    0 1px 2px rgba(45,136,128,0.04),
-    0 12px 32px rgba(45,136,128,0.10);
-  position: relative;
-  overflow: hidden;
-}
-.network-block-featured::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; bottom: 0;
-  width: 3px;
-  background: linear-gradient(180deg, var(--teal-main), var(--teal-light));
-}
-
-.network-block-head {
-  display: flex; align-items: baseline; justify-content: space-between;
-  flex-wrap: wrap; gap: 14px;
-  margin-bottom: 26px;
-  padding-bottom: 22px;
+.network-tier:last-of-type {
   border-bottom: 1px solid var(--border-on-light);
 }
-.network-block-title {
+.network-tier-head {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 64px;
+  align-items: baseline;
+  margin-bottom: 24px;
+}
+.network-tier-name {
   font-family: var(--font-display);
-  font-size: 26px;
+  font-size: clamp(20px, 2vw, 26px);
   font-weight: 400;
   letter-spacing: -0.012em;
   color: var(--text-dark);
   line-height: 1.2;
 }
-.network-block-title em { font-style: italic; color: var(--teal-main); font-weight: 400; }
-.network-block-meta {
-  font-family: var(--font-mono);
-  font-size: 10px; font-weight: 500;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
+.network-tier-name em { font-style: italic; color: var(--teal-main); font-weight: 400; }
+.network-tier-label {
+  font-size: 11px;
+  font-weight: 400;
   color: var(--text-soft);
+  letter-spacing: 0.14em;
+  font-variant: all-small-caps;
+  padding-top: 6px;
 }
-.network-block-featured .network-block-meta { color: var(--teal-main); }
-
-.network-block-desc {
+.network-tier-desc {
   font-size: 14.5px;
   line-height: 1.7;
   color: var(--text-mid);
-  margin-bottom: 24px;
-  max-width: 64ch;
+  font-weight: 300;
+  max-width: 68ch;
+  margin-bottom: 28px;
+  text-wrap: pretty;
 }
-.network-block-desc strong { color: var(--text-dark); font-weight: 500; }
+.network-tier-desc strong { color: var(--text-dark); font-weight: 400; }
+.network-disclaimer-plain {
+  margin-top: 44px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-soft);
+  font-style: italic;
+  max-width: 600px;
+}
 
 .chips { display: flex; flex-wrap: wrap; gap: 10px; }
 .chip {
@@ -1266,8 +945,6 @@ img, video { max-width: 100%; display: block; }
   border-radius: 50%;
   background: var(--teal-main);
 }
-.network-block-featured .chip { background: var(--bg-white); }
-
 /* ─── Grilla de logos de prestadores ─── */
 .logo-grid {
   display: grid;
@@ -1282,7 +959,7 @@ img, video { max-width: 100%; display: block; }
   padding: 10px 18px;
   background: var(--bg-white);
   border: 1px solid var(--border-on-light);
-  border-radius: 14px;
+  border-radius: 4px;
   transition: transform 0.35s var(--ease-cinematic),
               border-color 0.35s, box-shadow 0.35s;
 }
@@ -1305,38 +982,9 @@ img, video { max-width: 100%; display: block; }
   filter: grayscale(0%);
   opacity: 1;
 }
-.network-block-featured .logo-cell { background: var(--bg-white); }
-
 /* En mobile: logos a color directo (sin hover disponible) */
 @media (hover: none), (max-width: 760px) {
   .logo-cell img { filter: grayscale(0%); opacity: 1; }
-}
-
-.network-disclaimer {
-  margin: 44px auto 0;
-  max-width: 720px;
-  padding: 22px 28px;
-  background: linear-gradient(180deg, rgba(45,136,128,0.055), rgba(45,136,128,0.02));
-  border: 1px solid rgba(45,136,128,0.14);
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.network-disclaimer-icon {
-  flex-shrink: 0;
-  width: 40px; height: 40px;
-  display: inline-flex; align-items: center; justify-content: center;
-  border-radius: 11px;
-  background: rgba(45,136,128,0.10);
-  color: var(--teal-main);
-}
-.network-disclaimer-icon svg { width: 20px; height: 20px; }
-.network-disclaimer p {
-  font-size: 13.5px;
-  line-height: 1.7;
-  color: var(--text-mid);
-  margin: 0;
 }
 
 /* ─── INCLUDES ────────────────────────────────────────────── */
@@ -1369,54 +1017,22 @@ img, video { max-width: 100%; display: block; }
 .include-item {
   padding: 36px 28px 30px;
   border: 1px solid var(--border-on-light);
-  border-radius: 18px;
+  border-radius: 12px;
   background: var(--bg-white);
-  transition: transform 0.5s var(--ease-cinematic),
-              border-color 0.4s, background 0.4s,
-              box-shadow 0.5s;
+  transition: border-color 0.4s, background 0.4s, box-shadow 0.5s;
   display: flex; flex-direction: column; gap: 18px;
   position: relative;
   overflow: hidden;
   box-shadow: var(--elev-1);
 }
-.include-item::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 50%;
-  width: 0; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--teal-main), transparent);
-  transition: width 0.6s var(--ease-cinematic), left 0.6s var(--ease-cinematic);
-}
 .include-item:hover {
-  transform: translateY(-5px);
   border-color: rgba(45,136,128,0.22);
-  box-shadow:
-    0 12px 32px rgba(45,136,128,0.10),
-    0 24px 56px rgba(45,136,128,0.06);
 }
-.include-item:hover::before { width: 100%; left: 0; }
 .include-icon-wrap {
-  width: 54px; height: 54px;
+  width: 48px; height: 48px;
   display: flex; align-items: center; justify-content: center;
-  border-radius: 14px;
-  background:
-    radial-gradient(ellipse at 30% 20%, rgba(126,200,191,0.30) 0%, transparent 60%),
-    linear-gradient(135deg, rgba(45,136,128,0.12) 0%, rgba(45,136,128,0.04) 100%);
   color: var(--teal-main);
   flex-shrink: 0;
-  border: 1px solid rgba(45,136,128,0.16);
-  transition: transform 0.5s var(--ease-bounce),
-              background 0.4s, border-color 0.3s,
-              box-shadow 0.4s, color 0.3s;
-}
-.include-item:hover .include-icon-wrap {
-  transform: scale(1.06);
-  background:
-    radial-gradient(ellipse at 30% 20%, rgba(126,200,191,0.42) 0%, transparent 60%),
-    linear-gradient(135deg, rgba(45,136,128,0.20) 0%, rgba(45,136,128,0.08) 100%);
-  border-color: rgba(45,136,128,0.32);
-  color: var(--teal-dark);
-  box-shadow: 0 6px 16px rgba(45,136,128,0.18);
 }
 .include-icon-wrap svg { width: 26px; height: 26px; }
 .include-title {
@@ -1459,7 +1075,7 @@ img, video { max-width: 100%; display: block; }
 }
 .plan-card {
   background: var(--bg-white);
-  border-radius: 24px;
+  border-radius: 10px;
   padding: 40px 30px 34px;
   border: 1px solid var(--border-on-light);
   box-shadow: var(--elev-1);
@@ -1470,28 +1086,17 @@ img, video { max-width: 100%; display: block; }
   display: flex; flex-direction: column;
   overflow: hidden;
 }
-.plan-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--teal-main), transparent);
-  opacity: 0;
-  transition: opacity 0.5s var(--ease-cinematic);
-}
 .plan-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-4px);
   box-shadow:
     0 1px 2px rgba(45,136,128,0.04),
     0 20px 48px rgba(45,136,128,0.12),
     0 40px 80px rgba(45,136,128,0.06);
   border-color: rgba(45,136,128,0.18);
 }
-.plan-card:hover::before { opacity: 1; }
 
 .plan-card.featured {
-  background:
-    linear-gradient(180deg, #0C302D 0%, #051A18 100%);
+  background: var(--bg-dark);
   color: var(--text-on-dark);
   border: 1px solid rgba(185,229,223,0.20);
   box-shadow:
@@ -1501,21 +1106,15 @@ img, video { max-width: 100%; display: block; }
   position: relative;
   z-index: 2;
 }
-.plan-card.featured::before {
-  opacity: 1;
-  background: linear-gradient(90deg, transparent, var(--teal-light), transparent);
-}
-.plan-card.featured::after {
-  content: '';
+.plan-card-featured-accent {
   position: absolute;
-  top: 0; right: -20%;
-  width: 80%; height: 60%;
-  background: radial-gradient(ellipse, rgba(63,169,159,0.16), transparent 60%);
-  pointer-events: none;
-  mix-blend-mode: screen;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--teal-main), var(--teal-light));
+  z-index: 3;
 }
 .plan-card.featured:hover {
-  transform: translateY(-10px);
+  transform: translateY(-4px);
   box-shadow:
     0 1px 2px rgba(0,0,0,0.10),
     0 28px 64px rgba(15,54,51,0.40),
@@ -1523,26 +1122,13 @@ img, video { max-width: 100%; display: block; }
   border-color: rgba(185,229,223,0.32);
 }
 
-.plan-badge {
-  position: absolute;
-  top: 18px; left: 50%;
-  transform: translateX(-50%);
-  background: var(--teal-light);
-  color: var(--bg-hero);
-  font-family: var(--font-mono);
-  font-size: 10px; font-weight: 600;
-  letter-spacing: 0.20em;
-  text-transform: uppercase;
-  padding: 7px 16px;
-  border-radius: 100px;
-  white-space: nowrap;
-  box-shadow:
-    0 4px 12px rgba(185,229,223,0.32),
-    0 1px 2px rgba(0,0,0,0.10);
-  z-index: 3;
+.plan-discount-note {
+  font-size: 11.5px;
+  color: var(--text-soft);
+  font-style: italic;
+  margin-bottom: 8px;
 }
-/* When featured carries a badge, push content down */
-.plan-card.featured .plan-tag { margin-top: 28px; }
+.plan-card.featured .plan-discount-note { color: var(--text-on-dark-mute); }
 .plan-tag {
   font-family: var(--font-mono);
   font-size: 10px; font-weight: 500;
@@ -1619,6 +1205,68 @@ img, video { max-width: 100%; display: block; }
 .plan-card:hover .plan-features li:hover { transform: translateX(3px); }
 .plan-card:hover .plan-features li:hover::before { transform: scale(1.2); }
 
+/* ─── Per-card CTA button ─────────────────────────────────────
+   Inspired by 21st.dev pricing card pattern: each card closes with
+   a full-width action that carries the plan name in the WA message.
+   Featured card uses a teal-highlight button; standard cards use a
+   contained teal button. mt-auto pushes it to the card bottom. */
+.plan-card-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 22px;
+  padding: 13px 20px;
+  margin-top: 24px;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: transform 0.3s var(--ease-out),
+              box-shadow 0.35s var(--ease-out),
+              background 0.3s;
+  position: relative; z-index: 2;
+  white-space: nowrap;
+}
+/* Standard card CTA — teal fill on light background */
+.plan-card:not(.featured) .plan-card-cta {
+  background: var(--teal-main);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(45,136,128,0.22);
+}
+.plan-card:not(.featured) .plan-card-cta:hover {
+  background: var(--teal-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(45,136,128,0.30);
+}
+/* Featured card CTA — warm highlight on dark background */
+.plan-card.featured .plan-card-cta {
+  background: var(--text-on-dark);
+  color: var(--bg-hero);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.20);
+}
+.plan-card.featured .plan-card-cta:hover {
+  background: var(--teal-highlight);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(185,229,223,0.28);
+}
+.plan-card-cta svg {
+  width: 14px; height: 14px; flex-shrink: 0;
+  transition: transform 0.3s var(--ease-out);
+}
+.plan-card-cta:hover svg { transform: translateX(3px); }
+
+/* ─── Hero highlight inline emphasis ─────────────────────────
+   Referenced in HTML but had no CSS rule. Warm accent underline
+   that draws attention to the core product mechanism. */
+.highlight {
+  color: var(--warm-accent);
+  font-weight: 400;
+}
+
 /* Featured aportes price chip */
 .plan-card.featured .plan-aportes-line {
   display: inline-flex; align-items: baseline; gap: 6px;
@@ -1635,6 +1283,99 @@ img, video { max-width: 100%; display: block; }
 .plan-card.featured .plan-aportes-line .price-suffix {
   font-size: 14px;
   color: var(--teal-light);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NEW PREMIUM SECTIONS — added in redesign pass
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── CIERRE V2 — centered editorial close ──────────────────── */
+.cierre-v2 {
+  background: var(--bg-hero);
+  color: var(--text-on-dark);
+  padding: 140px 40px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.cierre-v2::before {
+  content: '';
+  position: absolute;
+  top: -30%; left: 50%;
+  transform: translateX(-50%);
+  width: 80%; height: 100%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(45,136,128,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cierre-v2-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.cierre-v2-label {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-on-dark-mute);
+  letter-spacing: 0.20em;
+  font-variant: all-small-caps;
+  margin-bottom: 32px;
+  display: block;
+}
+.cierre-v2-headline {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.020em;
+  color: var(--text-on-dark);
+  margin-bottom: 40px;
+  text-wrap: balance;
+}
+.cierre-v2-headline em { font-style: italic; color: var(--teal-highlight); font-weight: 400; }
+.cierre-v2-rule {
+  width: 40px;
+  height: 1px;
+  background: rgba(255,255,255,0.18);
+  margin: 0 auto 40px;
+}
+.cierre-v2-contact {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(36px, 5.5vw, 72px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--text-on-dark);
+  display: inline-block;
+  position: relative;
+  transition: color 0.4s var(--ease-cinematic);
+  margin-bottom: 20px;
+}
+.cierre-v2-contact::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 1px;
+  background: var(--text-on-dark);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.5s var(--ease-cinematic);
+}
+.cierre-v2-contact:hover { color: var(--warm-accent); }
+.cierre-v2-contact:hover::after { transform: scaleX(1); background: var(--warm-accent); }
+.cierre-v2-sub {
+  font-size: 13px;
+  color: var(--text-on-dark-mute);
+  letter-spacing: 0.04em;
+  margin-bottom: 32px;
+  display: block;
+}
+.cierre-v2-trust {
+  font-size: 11px;
+  color: var(--text-on-dark-mute);
+  letter-spacing: 0.14em;
+  font-variant: all-small-caps;
 }
 
 /* ─── FAQ ─────────────────────────────────────────────────── */
@@ -1789,66 +1530,6 @@ img, video { max-width: 100%; display: block; }
 }
 .faq-answer-inner strong { color: var(--text-dark); font-weight: 500; }
 
-/* ─── CIERRE ──────────────────────────────────────────────── */
-
-.cierre {
-  background: transparent;
-  padding: 0 40px 110px;
-  position: relative;
-}
-.cierre-inner {
-  max-width: 880px;
-  margin: 0 auto;
-  padding-top: 72px;
-  border-top: 1px solid var(--border-on-light);
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center;
-  gap: 28px;
-  position: relative;
-}
-.cierre-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 11px; font-weight: 500;
-  letter-spacing: 0.30em;
-  text-transform: uppercase;
-  color: var(--teal-main);
-  display: inline-flex; align-items: center; gap: 10px;
-}
-.cierre-eyebrow::before,
-.cierre-eyebrow::after {
-  content: '';
-  width: 24px; height: 1px;
-  background: currentColor;
-  opacity: 0.4;
-}
-.cierre-line {
-  font-family: var(--font-display);
-  font-size: clamp(24px, 2.4vw, 34px);
-  font-weight: 400;
-  line-height: 1.3;
-  color: var(--text-dark);
-  letter-spacing: -0.014em;
-  max-width: 32ch;
-  text-wrap: balance;
-}
-.cierre-line em { font-style: italic; color: var(--teal-main); font-weight: 400; }
-.cierre .btn {
-  padding: 18px 36px;
-  font-size: 15px;
-  background: var(--text-dark);
-  color: var(--bg-white);
-  box-shadow:
-    0 1px 2px rgba(0,0,0,0.08),
-    0 8px 24px rgba(20,33,31,0.16);
-}
-.cierre .btn:hover {
-  background: var(--teal-main);
-  transform: translateY(-2px);
-  box-shadow:
-    0 4px 12px rgba(45,136,128,0.20),
-    0 16px 40px rgba(45,136,128,0.32);
-}
-
 /* ─── CTA intermedio de sección (sobre fondo claro) ───────── */
 .section-cta {
   margin: 60px auto 0;
@@ -1944,7 +1625,6 @@ img, video { max-width: 100%; display: block; }
   background: rgba(255,255,255,0.025);
   border: 1px solid var(--border-on-dark);
   border-radius: 100px;
-  backdrop-filter: blur(8px);
 }
 .footer-seal img { height: 22px; filter: brightness(0) invert(1); opacity: 0.85; display: block; }
 .footer-seal-text {
@@ -2059,29 +1739,14 @@ img, video { max-width: 100%; display: block; }
 @media (max-width: 1100px) {
   .plans-grid { grid-template-columns: repeat(2, 1fr); }
   .plan-card.featured { grid-column: span 2; }
-  .why-grid { grid-template-columns: repeat(2, 1fr); }
-  .why-card-featured { grid-column: span 2; }
   .includes-grid { grid-template-columns: repeat(3, 1fr); }
   .footer-top { grid-template-columns: 1.6fr 1fr 1fr; }
   .footer-col:last-child { grid-column: 1 / -1; }
-  .proof-grid { grid-template-columns: 1fr; max-width: 560px; margin-left: auto; margin-right: auto; }
 }
 
 @media (max-width: 1024px) {
-  .why-grid { grid-template-columns: 1fr; }
-  .why-card-featured { grid-column: span 1; }
-  .versus-grid { grid-template-columns: 1fr; gap: 24px; }
-  .versus-side-good { transform: none; }
-  .versus-side-good:hover { transform: translateY(-4px); }
-  /* En mobile el badge "Recomendado" se posiciona al borde superior del card,
-     no del versus-grid, y con menor offset horizontal */
-  .versus-side-good::after { right: 20px; }
-  .versus-divider { display: none; }
   .header-nav { display: none; }
   .includes-grid { grid-template-columns: repeat(2, 1fr); }
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hero-aside { justify-content: flex-start; }
-  .hero-stat { max-width: 420px; }
   .faq-layout { grid-template-columns: 1fr; gap: 48px; }
   .faq-aside { position: static; }
   .faq-aside-count { margin-top: 0; }
@@ -2109,15 +1774,6 @@ img, video { max-width: 100%; display: block; }
     background:
       linear-gradient(180deg, rgba(5,26,24,0.58) 0%, rgba(5,26,24,0.42) 30%, rgba(5,26,24,0.66) 70%, rgba(5,26,24,0.98) 100%);
   }
-  .hero-seal {
-    padding: 8px 14px 8px 10px;
-    gap: 10px;
-    margin-bottom: 32px;
-  }
-  .hero-seal-divider { display: none; }
-  .hero-seal-title { display: none; } /* en mobile sólo eyebrow + logo, más limpio */
-  .hero-seal-label { font-size: 9.5px; letter-spacing: 0.22em; }
-
   /* Tipografía hero: tope razonable para no romper jerarquía */
   .hero h1.h-display {
     font-size: clamp(38px, 8.5vw, 56px);
@@ -2136,14 +1792,26 @@ img, video { max-width: 100%; display: block; }
   .hero-actions { flex-direction: column; align-items: stretch; gap: 12px; width: 100%; }
   .hero-actions .btn { width: 100%; justify-content: center; padding: 16px 24px; }
 
-  /* Hero stat card: padding más justo */
-  .hero-stat {
-    min-width: 0; max-width: 100%; width: 100%;
-    padding: 22px 22px;
-    border-radius: 18px;
-  }
-  .hero-stat-value { font-size: 48px; }
-  .hero-stat-suffix { font-size: 14px; }
+  /* Hero credentials wrap */
+  .hero-credentials { flex-wrap: wrap; gap: 12px; }
+
+  /* PROOF editorial */
+  .proof-cite { grid-template-columns: 1fr; gap: 20px; padding: 36px 0; }
+
+  /* VERSUS table: single column, hide "today" side */
+  .versus-table-head, .versus-row { grid-template-columns: 1fr; }
+  .versus-table-head .versus-col-label.dim { display: none; }
+  .versus-row .versus-cell.dim { display: none; }
+
+  /* WHY rows */
+  .why-row { grid-template-columns: 48px 1fr; gap: 24px; padding: 36px 0; }
+
+  /* NETWORK tier head stacks */
+  .network-tier-head { grid-template-columns: 1fr; gap: 8px; }
+
+  /* CIERRE v2 */
+  .cierre-v2 { padding: 96px 20px; }
+  .cierre-v2-contact { font-size: clamp(28px, 8vw, 48px); }
 
   /* Sections: padding mucho más comprimido */
   .section { padding: 72px 20px; }
@@ -2153,29 +1821,9 @@ img, video { max-width: 100%; display: block; }
   /* Headlines de sección: tope que respete jerarquía */
   .h-section { font-size: clamp(28px, 7vw, 38px); }
 
-  /* PROOF — cards de prensa */
-  .press-card-body { padding: 22px 22px 24px; }
-  .press-card-source-name { font-size: 19px; }
-  .press-card-title { font-size: 17px; }
-
-  /* VERSUS — más compacto */
-  .versus-side { padding: 32px 24px; border-radius: 18px; }
-  .versus-list li { font-size: 14px; padding-left: 26px; }
-  .versus-footnote { font-size: 12px; padding: 14px 16px; }
-
-  /* NETWORK */
-  .network-block { padding: 28px 22px; border-radius: 18px; }
-  .network-block-title { font-size: 21px; }
-  .network-block-desc { font-size: 13.5px; }
-  .chip { font-size: 13px; padding: 9px 16px; }
-  .network-disclaimer { padding: 18px 20px; gap: 13px; }
-  .network-disclaimer p { font-size: 12.5px; }
-  .network-disclaimer-icon { width: 34px; height: 34px; }
-  .network-disclaimer-icon svg { width: 18px; height: 18px; }
-
   /* INCLUDES — 2 columnas, padding ajustado */
   .includes-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .include-item { padding: 26px 18px 22px; border-radius: 14px; gap: 14px; }
+  .include-item { padding: 26px 18px 22px; border-radius: 12px; gap: 14px; }
   .include-icon-wrap { width: 46px; height: 46px; }
   .include-icon-wrap svg { width: 22px; height: 22px; }
   .include-title { font-size: 15px; }
@@ -2184,18 +1832,12 @@ img, video { max-width: 100%; display: block; }
   /* PLANS — una sola columna */
   .plans-grid { grid-template-columns: 1fr; gap: 16px; }
   .plan-card.featured { grid-column: span 1; }
-  .plan-card { padding: 32px 24px 28px; border-radius: 18px; }
+  .plan-card { padding: 32px 24px 28px; border-radius: 10px; }
   .plan-card h3 { font-size: 24px; }
   .plan-card.featured h3 { font-size: 26px; }
   .plan-card.featured .plan-aportes-line .price { font-size: 32px; }
   .plan-features li { font-size: 13.5px; }
-
-  /* WHY */
-  .why-card { padding: 32px 24px; border-radius: 18px; }
-  .why-card-featured { padding: 36px 26px; }
-  .why-card h3 { font-size: 21px; }
-  .why-card-featured h3 { font-size: 26px; }
-  .why-card p { font-size: 14px; }
+  .plan-card-cta { font-size: 14px; padding: 14px 20px; }
 
   /* FAQ */
   .faq-question { padding: 22px 0; grid-template-columns: 28px 1fr 32px; gap: 12px; }
@@ -2207,20 +1849,14 @@ img, video { max-width: 100%; display: block; }
   .faq-aside .h-section { font-size: clamp(28px, 8vw, 38px); }
   .faq-aside-count-num { font-size: 30px; }
 
-  /* CIERRE */
-  .cierre { padding: 0 20px 64px; }
-  .cierre-inner { padding-top: 56px; gap: 22px; }
-  .cierre-line { font-size: clamp(22px, 5.8vw, 28px); }
-  .cierre .btn { padding: 16px 28px; font-size: 14px; }
-
   /* FOOTER */
   .footer { padding: 64px 20px 32px; }
   .footer-top { grid-template-columns: 1fr; gap: 40px; margin-bottom: 56px; padding-bottom: 48px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
   .footer-brand-tagline { font-size: 19px; }
 
-  /* WhatsApp float un poco más chico */
-  .wa-float { bottom: 16px; right: 16px; padding: 11px; }
+  /* WhatsApp float: hidden on mobile — sticky CTA bar covers the same action */
+  .wa-float { display: none; }
   .wa-float-icon { width: 24px; height: 24px; }
 
   /* Performance mobile: bajar blur costoso */
@@ -2231,7 +1867,6 @@ img, video { max-width: 100%; display: block; }
 @media (max-width: 480px) {
   .includes-grid { grid-template-columns: 1fr; }
   .hero h1.h-display { font-size: clamp(34px, 9vw, 44px); }
-  .hero-seal-text { gap: 0; }
 }
 
 /* ─── Reduced motion — accesibilidad ─────────────────────── */
@@ -2242,15 +1877,172 @@ img, video { max-width: 100%; display: block; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .reveal, .reveal-in, .reveal-fade, .reveal-stagger > *, .word-split .word { opacity: 1 !important; transform: none !important; filter: none !important; }
   /* Sin parallax ni autoplay agresivo del video */
   .hero-video-bg video { transform: translate(-50%, -50%) scale(1) !important; }
 }
+
+/* ─── MOBILE NAV DRAWER ───────────────────────────────────────
+   Burger toggle: visible ≤1024px (same breakpoint where .header-nav
+   is hidden). Three-bar → X animation, slide-in drawer from right. */
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+  z-index: 110;
+  transition: background 0.2s;
+}
+.nav-toggle:hover { background: rgba(255,255,255,0.07); }
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-on-dark);
+  border-radius: 2px;
+  transition: transform 0.35s var(--ease-out), opacity 0.25s, width 0.3s var(--ease-out);
+  transform-origin: center;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+@media (max-width: 1024px) { .nav-toggle { display: flex; } }
+
+.nav-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 26, 24, 0.55);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 105;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease-cinematic);
+}
+.nav-drawer-overlay.open { opacity: 1; pointer-events: auto; }
+
+.nav-drawer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: min(320px, 85vw);
+  background: var(--bg-hero);
+  border-left: 1px solid var(--border-on-dark);
+  z-index: 110;
+  display: flex;
+  flex-direction: column;
+  padding: 84px 32px calc(40px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(100%);
+  transition: transform 0.42s var(--ease-cinematic);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.nav-drawer.open { transform: translateX(0); }
+
+.nav-drawer-link {
+  display: flex;
+  align-items: center;
+  padding: 17px 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text-on-dark-soft);
+  border-bottom: 1px solid var(--border-on-dark);
+  transition: color 0.25s var(--ease-out), padding-left 0.3s var(--ease-out);
+}
+.nav-drawer-link:first-of-type { border-top: 1px solid var(--border-on-dark); }
+.nav-drawer-link:hover { color: var(--text-on-dark); padding-left: 10px; }
+
+.nav-drawer-cta {
+  margin-top: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 24px;
+  border-radius: 100px;
+  background: var(--text-on-dark);
+  color: var(--bg-hero);
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  transition: background 0.3s, transform 0.2s var(--ease-out);
+}
+.nav-drawer-cta:hover { background: var(--teal-highlight); transform: translateY(-1px); }
+.nav-drawer-cta svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* ─── STICKY MOBILE CTA BAR ──────────────────────────────────
+   Visible ≤768px only. Slides up from bottom once the user
+   scrolls past the hero section. Keeps WhatsApp CTA always
+   reachable regardless of scroll depth. */
+
+.mobile-cta-bar {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 85;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: rgba(5, 26, 24, 0.94);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-top: 1px solid var(--border-on-dark-2);
+  align-items: center;
+  gap: 10px;
+  transform: translateY(110%);
+  transition: transform 0.42s var(--ease-cinematic);
+}
+@media (max-width: 768px) { .mobile-cta-bar { display: flex; } }
+.mobile-cta-bar.visible { transform: translateY(0); }
+
+/* When bar visible, push the WA float button above it */
+body.bar-visible .wa-float {
+  bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  right: 14px;
+}
+
+.mobile-cta-bar-primary {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 16px;
+  border-radius: 100px;
+  background: #25D366;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  box-shadow: 0 4px 18px rgba(37,211,102,0.32);
+  transition: transform 0.2s var(--ease-out), box-shadow 0.3s;
+}
+.mobile-cta-bar-primary:active { transform: scale(0.97); }
+.mobile-cta-bar-primary svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+.mobile-cta-bar-secondary {
+  padding: 13px 16px;
+  border-radius: 100px;
+  border: 1px solid var(--border-on-dark-2);
+  color: var(--text-on-dark-soft);
+  font-size: 13px;
+  font-weight: 400;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+}
+.mobile-cta-bar-secondary:active { color: var(--text-on-dark); }
 </style>
 </head>
 <body>
 
-<div class="page-atmosphere" aria-hidden="true"></div>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <!-- ─── HEADER ───────────────────────────────────────────── -->
 <header class="header" id="header">
@@ -2269,7 +2061,27 @@ img, video { max-width: 100%; display: block; }
     Cotizar
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
   </a>
+  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navDrawer">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </header>
+
+<!-- ─── MOBILE NAV DRAWER ──────────────────────────────────── -->
+<div class="nav-drawer-overlay" id="navOverlay" aria-hidden="true"></div>
+<nav class="nav-drawer" id="navDrawer" aria-label="Menú de navegación" aria-hidden="true">
+  <a href="#proof"   class="nav-drawer-link">Respaldo</a>
+  <a href="#why"     class="nav-drawer-link">Por qué VIVANTE</a>
+  <a href="#network" class="nav-drawer-link">Prestadores</a>
+  <a href="#plans"   class="nav-drawer-link">Planes</a>
+  <a href="#faq"     class="nav-drawer-link">Preguntas</a>
+  <a href="https://wa.me/5492617243209?text=Hola%2C+vengo+de+vivante.ar+y+quiero+cotizar+el+Plan+por+Aportes"
+     class="nav-drawer-cta" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 .9-1 2.3 0 1.4 1 2.7 1.2 2.9.1.2 2 3 4.7 4.1.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12 .1-6.6-5.3-11.8-11.9-11.8zm0 22c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C2.2 6.7 6.6 2.3 12 2.3c2.6 0 5.1 1 7 2.9 1.9 1.9 2.9 4.3 2.9 7 0 5.3-4.5 9.8-9.9 9.8z"/></svg>
+    Cotizar gratis
+  </a>
+</nav>
 
 <!-- ─── HERO ─────────────────────────────────────────────── -->
 <section class="hero" id="hero">
@@ -2297,19 +2109,9 @@ img, video { max-width: 100%; display: block; }
 
   <div class="hero-inner">
     <div class="hero-text">
-    <div class="hero-seal">
-      <img src="premedic_logo_white.png" alt="PreMedic" class="hero-seal-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
-      <span class="hero-seal-logo-fallback" style="display:none;">PreMedic</span>
-      <div class="hero-seal-divider"></div>
-      <div class="hero-seal-text">
-        <span class="hero-seal-label">Canal oficial en Mendoza</span>
-        <span class="hero-seal-title">22 años de trayectoria en medicina privada</span>
-      </div>
-    </div>
+    <h1 class="h-display word-split" id="heroHeadline">Tus aportes ya pagan<br>una obra social.<br><em>Hacé que paguen algo mejor.</em></h1>
 
-    <h1 class="h-display">Tus aportes ya pagan<br>una obra social.<br><em>Hacé que paguen algo mejor.</em></h1>
-
-    <p class="lead hero-desc">
+    <p class="lead hero-desc reveal-fade">
       <strong>Si trabajás</strong> en relación de dependencia en Mendoza,
       el <span class="highlight">9% de tu sueldo bruto</span> ya financia una obra social.
       Te ayudamos a derivar esos aportes hacia <strong>PreMedic</strong> sin pagar un peso extra.
@@ -2317,7 +2119,7 @@ img, video { max-width: 100%; display: block; }
     </p>
 
     <div class="hero-actions">
-      <a href="https://wa.me/5492617243209?text=Hola%2C+vengo+de+vivante.ar+y+quiero+cotizar+el+Plan+por+Aportes" class="btn btn-primary" target="_blank" rel="noopener">
+      <a href="https://wa.me/5492617243209?text=Hola%2C+vengo+de+vivante.ar+y+quiero+cotizar+el+Plan+por+Aportes" class="btn btn-primary magnetic" target="_blank" rel="noopener" id="heroCta">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 .9-1 2.3 0 1.4 1 2.7 1.2 2.9.1.2 2 3 4.7 4.1.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12 .1-6.6-5.3-11.8-11.9-11.8zm0 22c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C2.2 6.7 6.6 2.3 12 2.3c2.6 0 5.1 1 7 2.9 1.9 1.9 2.9 4.3 2.9 7 0 5.3-4.5 9.8-9.9 9.8z"/></svg>
         Cotizar por WhatsApp
       </a>
@@ -2326,22 +2128,15 @@ img, video { max-width: 100%; display: block; }
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
-    </div>
 
-    <aside class="hero-aside">
-      <a href="https://wa.me/5492617243209?text=Hola%2C+vengo+de+vivante.ar+y+quiero+saber+si+me+alcanzan+los+aportes+para+el+Plan+por+Aportes" class="hero-stat" target="_blank" rel="noopener">
-        <div class="hero-stat-header">
-          <span class="hero-stat-dot"></span>
-          <span class="hero-stat-label">Plan por Aportes</span>
-        </div>
-        <div class="hero-stat-value">$0<span class="hero-stat-suffix">/mes</span></div>
-        <div class="hero-stat-sub">Derivá tus aportes hacia PreMedic, sin pagar un peso extra.</div>
-        <span class="hero-stat-cta">
-          Ver si me alcanza
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
-      </a>
-    </aside>
+    <div class="hero-credentials">
+      <span class="hero-credential">Canal oficial PreMedic</span>
+      <span class="hero-credential-sep" aria-hidden="true"></span>
+      <span class="hero-credential">22 años de trayectoria</span>
+      <span class="hero-credential-sep" aria-hidden="true"></span>
+      <span class="hero-credential">Gran Mendoza</span>
+    </div>
+    </div>
   </div>
 </section>
 
@@ -2356,34 +2151,21 @@ img, video { max-width: 100%; display: block; }
       <p class="lead" style="margin-left:auto;margin-right:auto;">La prensa especializada ubica a <strong>PreMedic</strong> entre las prepagas más accesibles del país. No es ranking armado por nosotros.</p>
     </div>
 
-    <div class="proof-grid reveal-stagger">
-      <article class="press-card">
-        <div class="press-card-image" data-placeholder="Clarín · Captura de prensa">
-          <img src="prensa-clarin.png" alt="Nota de Clarín: Prepagas económicas, las 5 alternativas más accesibles para no quedarse sin cobertura. PreMedic mencionada en primer lugar." loading="lazy" decoding="async" onerror="this.style.display='none'">
+    <div class="proof-editorial reveal">
+      <div class="proof-cite">
+        <div class="proof-cite-source">Clarín</div>
+        <div class="proof-cite-body">
+          <p class="proof-cite-quote">PreMedic figura entre las 5 prepagas más accesibles del país.</p>
+          <span class="proof-cite-meta">Prepagas económicas — Sociedad · 2025</span>
         </div>
-        <div class="press-card-body">
-          <div class="press-card-source">
-            <span class="press-card-source-name">Clarín</span>
-            <span class="press-card-source-dot"></span>
-            <span class="press-card-source-meta">Prepagas accesibles · 2025</span>
-          </div>
-          <p class="press-card-title">PreMedic figura entre las 5 prepagas más accesibles del país.</p>
+      </div>
+      <div class="proof-cite">
+        <div class="proof-cite-source">iProfesional</div>
+        <div class="proof-cite-body">
+          <p class="proof-cite-quote">El Plan por Aportes de PreMedic, entre los más económicos del mercado argentino.</p>
+          <span class="proof-cite-meta">Las 3 prepagas más baratas · Salud · 2025</span>
         </div>
-      </article>
-
-      <article class="press-card">
-        <div class="press-card-image" data-placeholder="iProfesional · Captura de prensa">
-          <img src="prensa-iprofesional.png" alt="Nota de iProfesional: Las 3 prepagas más baratas en Argentina hoy. PreMedic Plan por aportes mencionado primero." loading="lazy" decoding="async" onerror="this.style.display='none'">
-        </div>
-        <div class="press-card-body">
-          <div class="press-card-source">
-            <span class="press-card-source-name">iProfesional</span>
-            <span class="press-card-source-dot"></span>
-            <span class="press-card-source-meta">Las 3 más económicas · 2025</span>
-          </div>
-          <p class="press-card-title">El Plan por Aportes de PreMedic, entre los más económicos del mercado argentino.</p>
-        </div>
-      </article>
+      </div>
     </div>
 
     <p class="proof-footer">Referencias: Clarín, sección Sociedad — “Prepagas económicas: las 5 alternativas más accesibles”. iProfesional, sección Salud — “Las 3 prepagas más baratas en Argentina hoy”. Notas publicadas en 2025.</p>
@@ -2400,37 +2182,40 @@ img, video { max-width: 100%; display: block; }
       <h2 class="h-section">El día que necesitás<br>un turno, <em>la diferencia es esta.</em></h2>
       <p class="lead">Compará lo que te da hoy tu obra social con lo que te da el <strong>Plan por Aportes de PreMedic</strong> — usando exactamente los mismos aportes que ya descuentan de tu sueldo.</p>
     </div>
-    <div class="versus-grid reveal">
-      <div class="versus-side versus-side-bad">
-        <span class="versus-tag">Hoy</span>
-        <h3 class="versus-title">Tu obra social <em>asignada por convenio.</em></h3>
-        <ul class="versus-list">
-          <li>Turnos con especialistas a 30, 45 días o más.</li>
-          <li>Derivación a clínicas que no elegiste.</li>
-          <li>Copagos por consulta, estudios y prácticas.</li>
-          <li>Atención donde hay lugar, no donde querés.</li>
-          <li>Sin videoconsulta inmediata cuando lo necesitás.</li>
-          <li>Sin asistencia al viajero cuando salís de Mendoza.</li>
-          <li>Reglas de cobertura que cambian sin aviso.</li>
-        </ul>
+    <div class="versus-table reveal">
+      <div class="versus-table-head">
+        <div class="versus-col-label dim">Tu obra social<br>asignada por convenio.</div>
+        <div class="versus-col-label strong">PreMedic <em>con VIVANTE.</em></div>
       </div>
-      <div class="versus-divider"><div class="versus-divider-circle">vs.</div></div>
-      <div class="versus-side versus-side-good">
-        <span class="versus-tag">Con VIVANTE · Plan por Aportes</span>
-        <h3 class="versus-title">PreMedic <em>con tu mismo aporte.</em></h3>
-        <ul class="versus-list">
-          <li>Red base PreMedic en Gran Mendoza: Hospital Santa Isabel de Hungría, Sociedad Española, Attimo Salud, Clínica San Donà, entre otros.</li>
-          <li>Sin copagos en consultas de clínica médica, ginecología y pediatría.</li>
-          <li>Cobertura 100% en internación, terapia intensiva y UCO.</li>
-          <li>PreMedic Medical Center propio en Av. Colón 102, +30 especialidades.</li>
-          <li>Videoconsultas 24/7 con clínica, ginecología y pediatría.</li>
-          <li>Cardinal Assistance: asistencia al viajero nacional y países limítrofes.</li>
-          <li>Asesor real por WhatsApp, no chatbots.</li>
-        </ul>
-        <div class="versus-footnote">
-          <strong>¿Querés sumar Hospital Español, Clínica Francesa o Clínica de Cuyo?</strong> Esos prestadores son parte de los Planes 300 y 400. Te explicamos las diferencias por WhatsApp antes de cualquier trámite.
-        </div>
+      <div class="versus-row">
+        <div class="versus-cell dim">Turnos con especialistas a 30, 45 días o más.</div>
+        <div class="versus-cell strong">Red base PreMedic en Gran Mendoza: Hospital Santa Isabel de Hungría, Sociedad Española, Attimo Salud, Clínica San Donà, entre otros.</div>
       </div>
+      <div class="versus-row">
+        <div class="versus-cell dim">Derivación a clínicas que no elegiste.</div>
+        <div class="versus-cell strong">Sin copagos en consultas de clínica médica, ginecología y pediatría.</div>
+      </div>
+      <div class="versus-row">
+        <div class="versus-cell dim">Copagos por consulta, estudios y prácticas.</div>
+        <div class="versus-cell strong">Cobertura 100% en internación, terapia intensiva y UCO.</div>
+      </div>
+      <div class="versus-row">
+        <div class="versus-cell dim">Atención donde hay lugar, no donde querés.</div>
+        <div class="versus-cell strong">PreMedic Medical Center propio en Av. Colón 102, +30 especialidades.</div>
+      </div>
+      <div class="versus-row">
+        <div class="versus-cell dim">Sin videoconsulta inmediata cuando lo necesitás.</div>
+        <div class="versus-cell strong">Videoconsultas 24/7 con clínica, ginecología y pediatría.</div>
+      </div>
+      <div class="versus-row">
+        <div class="versus-cell dim">Sin asistencia al viajero cuando salís de Mendoza.</div>
+        <div class="versus-cell strong">Cardinal Assistance: asistencia al viajero nacional y países limítrofes.</div>
+      </div>
+      <div class="versus-row">
+        <div class="versus-cell dim">Reglas de cobertura que cambian sin aviso.</div>
+        <div class="versus-cell strong">Asesor real por WhatsApp, no chatbots.</div>
+      </div>
+      <p class="versus-footnote-row"><strong>¿Querés sumar Hospital Español, Clínica Francesa o Clínica de Cuyo?</strong> Esos prestadores son parte de los Planes 300 y 400. Te explicamos las diferencias por WhatsApp antes de cualquier trámite.</p>
     </div>
   </div>
 </section>
@@ -2446,24 +2231,24 @@ img, video { max-width: 100%; display: block; }
     </div>
 
     <div class="network-blocks reveal-stagger">
-      <div class="network-block network-block-featured">
-        <div class="network-block-head">
-          <h3 class="network-block-title">PreMedic Medical Center <em>— centro propio</em></h3>
-          <span class="network-block-meta">Disponible en todos los planes</span>
+      <div class="network-tier">
+        <div class="network-tier-head">
+          <div><h3 class="network-tier-name">PreMedic Medical Center <em>— centro propio</em></h3></div>
+          <span class="network-tier-label">Disponible en todos los planes</span>
         </div>
-        <p class="network-block-desc">El centro médico propio de PreMedic en Mendoza Capital. <strong>Av. Colón 102, Local 2.</strong> Más de 30 especialidades médicas, diagnóstico por imágenes y odontología propia con Smile Group.</p>
+        <p class="network-tier-desc">El centro médico propio de PreMedic en Mendoza Capital. <strong>Av. Colón 102, Local 2.</strong> Más de 30 especialidades médicas, diagnóstico por imágenes y odontología propia con Smile Group.</p>
         <div class="logo-grid">
           <div class="logo-cell"><img src="/img/prestadores/premedic-medical-center.webp" alt="PreMedic Medical Center, centro médico propio en Mendoza" loading="lazy" decoding="async"></div>
           <div class="logo-cell"><img src="/img/prestadores/smilegroup.webp" alt="Smile Group, odontología propia de PreMedic" loading="lazy" decoding="async"></div>
         </div>
       </div>
 
-      <div class="network-block">
-        <div class="network-block-head">
-          <h3 class="network-block-title">Red base <em>— Plan por Aportes y Plan 200</em></h3>
-          <span class="network-block-meta">Prestadores incluidos</span>
+      <div class="network-tier">
+        <div class="network-tier-head">
+          <div><h3 class="network-tier-name">Red base <em>— Plan por Aportes y Plan 200</em></h3></div>
+          <span class="network-tier-label">Prestadores incluidos</span>
         </div>
-        <p class="network-block-desc">La red base del Plan por Aportes y el Plan 200. Cubre las especialidades esenciales en <strong>Mendoza Capital, Godoy Cruz, Guaymallén, Luján y Maipú.</strong></p>
+        <p class="network-tier-desc">La red base del Plan por Aportes y el Plan 200. Cubre las especialidades esenciales en <strong>Mendoza Capital, Godoy Cruz, Guaymallén, Luján y Maipú.</strong></p>
         <div class="logo-grid">
           <div class="logo-cell"><img src="/img/prestadores/attimo-salud.webp" alt="Attimo Salud, prestador de la red base en Mendoza" loading="lazy" decoding="async"></div>
           <div class="logo-cell"><img src="/img/prestadores/logoUROclinica.webp" alt="Uroclínica, prestador de la red base en Mendoza" loading="lazy" decoding="async"></div>
@@ -2476,12 +2261,12 @@ img, video { max-width: 100%; display: block; }
         </div>
       </div>
 
-      <div class="network-block">
-        <div class="network-block-head">
-          <h3 class="network-block-title">Red top <em>— Planes 300 y 400</em></h3>
-          <span class="network-block-meta">Nombres que pesan en Mendoza</span>
+      <div class="network-tier">
+        <div class="network-tier-head">
+          <div><h3 class="network-tier-name">Red top <em>— Planes 300 y 400</em></h3></div>
+          <span class="network-tier-label">Nombres que pesan en Mendoza</span>
         </div>
-        <p class="network-block-desc">Los prestadores de mayor reconocimiento del Gran Mendoza. Si querés atenderte en <strong>Hospital Español, Clínica de Cuyo o Clínica Arizu</strong>, vas a los planes 300 o 400.</p>
+        <p class="network-tier-desc">Los prestadores de mayor reconocimiento del Gran Mendoza. Si querés atenderte en <strong>Hospital Español, Clínica de Cuyo o Clínica Arizu</strong>, vas a los planes 300 o 400.</p>
         <div class="logo-grid">
           <div class="logo-cell"><img src="/img/prestadores/hospitalespanol.webp" alt="Hospital Español de Mendoza, red top de los Planes 300 y 400" loading="lazy" decoding="async"></div>
           <div class="logo-cell"><img src="/img/prestadores/hospital-universitario.webp" alt="Hospital Universitario, red top de los Planes 300 y 400 en Mendoza" loading="lazy" decoding="async"></div>
@@ -2492,12 +2277,7 @@ img, video { max-width: 100%; display: block; }
       </div>
     </div>
 
-    <div class="network-disclaimer">
-      <span class="network-disclaimer-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11.5v5"/><circle cx="12" cy="7.8" r="0.6" fill="currentColor" stroke="none"/></svg>
-      </span>
-      <p>La cartilla completa de prestadores se confirma según el plan al cotizar. Te pasamos el detalle exacto por WhatsApp antes de iniciar cualquier trámite.</p>
-    </div>
+    <p class="network-disclaimer-plain reveal-fade">La cartilla completa de prestadores se confirma según el plan al cotizar. Te pasamos el detalle exacto por WhatsApp antes de iniciar cualquier trámite.</p>
 
     <div class="section-cta reveal">
       <a href="https://wa.me/5492617243209?text=Hola%2C+vengo+de+vivante.ar+y+quiero+saber+en+qu%C3%A9+prestadores+de+Mendoza+puedo+atenderme" class="btn" target="_blank" rel="noopener">
@@ -2643,7 +2423,7 @@ img, video { max-width: 100%; display: block; }
 
     <div class="plans-grid reveal-stagger">
       <div class="plan-card featured">
-        <div class="plan-badge">Más elegido</div>
+        <span class="plan-card-featured-accent" aria-hidden="true"></span>
         <div class="plan-tag">Plan por Aportes</div>
         <h3>Empleados <em>con obra social</em></h3>
         <div class="plan-aportes-line">
@@ -2656,42 +2436,61 @@ img, video { max-width: 100%; display: block; }
           <li>Red base + PreMedic Medical Center</li>
           <li>Videoconsultas 24/7 incluidas</li>
         </ul>
+        <a href="https://wa.me/5492617243209?text=Hola%2C+vengo+de+vivante.ar+y+quiero+cotizar+el+Plan+por+Aportes" class="plan-card-cta" target="_blank" rel="noopener">
+          Cotizar Plan por Aportes
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
 
       <div class="plan-card">
         <div class="plan-tag">Plan 200</div>
+        <p class="plan-discount-note">25% de descuento vigente</p>
         <h3>Cobertura <em>esencial</em></h3>
         <p class="plan-desc">La opción más económica para quienes pagan de bolsillo. Cobertura sólida con la red base y los servicios fundamentales incluidos.</p>
         <ul class="plan-features">
-          <li>25% off permanente para nuevas afiliaciones</li>
           <li>Sin copagos en consultas clínica médica, gine y pediatría</li>
           <li>Red base de prestadores</li>
           <li>Asistencia médica online 24/7</li>
+          <li>Descuento permanente para nuevas afiliaciones</li>
         </ul>
+        <a href="https://wa.me/5492617243209?text=Hola%2C+vengo+de+vivante.ar+y+quiero+cotizar+el+Plan+200" class="plan-card-cta" target="_blank" rel="noopener">
+          Cotizar Plan 200
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
 
       <div class="plan-card">
         <div class="plan-tag">Plan 300</div>
+        <p class="plan-discount-note">25% de descuento vigente</p>
         <h3>Cobertura <em>ampliada</em></h3>
         <p class="plan-desc">Suma Hospital Español, Clínica Francesa y Centro Médico Chacras. Ideal para quienes priorizan acceso a prestadores top de Mendoza.</p>
         <ul class="plan-features">
-          <li>25% off permanente para nuevas afiliaciones</li>
           <li>Sin copagos</li>
           <li>Suma Hospital Español de Mendoza</li>
           <li>Suma Clínica Francesa y CM Chacras</li>
+          <li>Descuento permanente para nuevas afiliaciones</li>
         </ul>
+        <a href="https://wa.me/5492617243209?text=Hola%2C+vengo+de+vivante.ar+y+quiero+cotizar+el+Plan+300" class="plan-card-cta" target="_blank" rel="noopener">
+          Cotizar Plan 300
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
 
       <div class="plan-card">
         <div class="plan-tag">Plan 400</div>
+        <p class="plan-discount-note">25% de descuento vigente</p>
         <h3>Experiencia <em>premium</em></h3>
         <p class="plan-desc">El nivel más alto. Acceso a Clínica de Cuyo y habitación individual en internación. Para quienes priorizan máximo confort.</p>
         <ul class="plan-features">
-          <li>25% off permanente para nuevas afiliaciones</li>
           <li>Sin copagos</li>
           <li>Acceso a Clínica de Cuyo</li>
           <li>Internación en habitación individual</li>
+          <li>Descuento permanente para nuevas afiliaciones</li>
         </ul>
+        <a href="https://wa.me/5492617243209?text=Hola%2C+vengo+de+vivante.ar+y+quiero+cotizar+el+Plan+400" class="plan-card-cta" target="_blank" rel="noopener">
+          Cotizar Plan 400
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
     </div>
 
@@ -2714,35 +2513,34 @@ img, video { max-width: 100%; display: block; }
       <h2 class="h-section">Lo que ninguna prepaga<br>te explica <em>en su publicidad.</em></h2>
       <p class="lead lead-dark">Somos una comercializadora <strong>local, independiente y enfocada en Gran Mendoza.</strong> No vendemos un producto cualquiera: te ayudamos a entender qué cobertura te corresponde, qué tipo de afiliación te conviene y por qué.</p>
     </div>
-    <div class="why-grid reveal-stagger">
-      <div class="why-card why-card-featured">
-        <span class="why-card-num">01</span>
-        <h3>22 años de trayectoria <em>en medicina privada.</em></h3>
-        <p>PreMedic Medicina Privada opera en Argentina desde hace más de dos décadas. <strong>Cobertura 100% en internación, terapia intensiva y UCO.</strong> Servicio de ambulancias ECCO 24/7 y respaldo institucional reconocido por Clarín e iProfesional entre las prepagas más accesibles del país.</p>
+    <div class="why-list">
+      <div class="why-row reveal-in">
+        <div class="why-row-num">01</div>
+        <div class="why-row-body">
+          <h3 class="why-row-title">Asesoramiento <em>sin compromiso</em></h3>
+          <p class="why-row-desc">No vendemos primero y explicamos después. Te mostramos qué cubre cada plan, qué copagos existen, qué prestadores están disponibles cerca tuyo — y recién después decidís si querés avanzar.</p>
+        </div>
       </div>
-
-      <div class="why-card why-card-pmc">
-        <span class="why-card-pmc-tag">Centro propio · Mendoza</span>
-        <h3>PreMedic Medical Center.</h3>
-        <p>Centro médico propio en <strong>Av. Colón 102, Mendoza Capital.</strong> Más de 30 especialidades, diagnóstico por imágenes y <strong>Smile Group</strong>, red odontológica propia.</p>
+      <div class="why-row reveal-in">
+        <div class="why-row-num">02</div>
+        <div class="why-row-body">
+          <h3 class="why-row-title">Canal oficial <em>de PreMedic</em></h3>
+          <p class="why-row-desc">VIVANTE es la comercializadora independiente autorizada de PreMedic en Gran Mendoza. <strong>22 años gestionando afiliaciones</strong> en la región. Conocemos el sistema, los tiempos y los requisitos mejor que nadie.</p>
+        </div>
       </div>
-
-      <div class="why-card">
-        <span class="why-card-num">02</span>
-        <h3>Asesoramiento <em>local y humano.</em></h3>
-        <p>Te atiende un asesor real por WhatsApp, no un chatbot. Conocemos la cartilla de Mendoza, los tiempos del trámite y los detalles que cambian de un plan al otro.</p>
+      <div class="why-row reveal-in">
+        <div class="why-row-num">03</div>
+        <div class="why-row-body">
+          <h3 class="why-row-title">Gestión <em>de principio a fin</em></h3>
+          <p class="why-row-desc">Desde el cálculo de aportes hasta la cobertura activa, nosotros manejamos el proceso. Recopilamos documentación, iniciamos el trámite de derivación y te avisamos cuando todo está listo. <strong>Vos sólo firmás.</strong></p>
+        </div>
       </div>
-
-      <div class="why-card">
-        <span class="why-card-num">03</span>
-        <h3>Sin costos ocultos <em>ni letra chica.</em></h3>
-        <p>Te explicamos exactamente qué cubre tu plan, qué no cubre y dónde hay copagos. Antes de cualquier trámite, no después.</p>
-      </div>
-
-      <div class="why-card">
-        <span class="why-card-num">04</span>
-        <h3>Canal oficial PreMedic en Mendoza.</h3>
-        <p>Estamos autorizados a comercializar todos los planes de PreMedic en Gran Mendoza y a <strong>aplicar las promociones vigentes</strong>. Sin intermediarios entre vos y la prepaga.</p>
+      <div class="why-row reveal-in">
+        <div class="why-row-num">04</div>
+        <div class="why-row-body">
+          <h3 class="why-row-title">Acompañamiento <em>posterior</em></h3>
+          <p class="why-row-desc">La relación no termina cuando se activa la cobertura. Si tenés dudas sobre autorizaciones, cambios de plan, o incorporar a un familiar, respondemos por WhatsApp. Sin chatbots, sin derivaciones.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -2829,20 +2627,23 @@ img, video { max-width: 100%; display: block; }
             <div class="faq-answer-inner">Es algo habitual y no es un problema. Cuando hablamos por WhatsApp te hacemos el cálculo exacto según tu sueldo bruto y te explicamos cómo queda tu plan antes de iniciar cualquier trámite.</div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── CIERRE ───────────────────────────────────────────── -->
-<section class="cierre">
-  <div class="cierre-inner">
-    <span class="cierre-eyebrow">Antes de cotizar</span>
-    <p class="cierre-line">Si algo no te quedó claro, <em>seguimos por WhatsApp.</em></p>
-    <a href="https://wa.me/5492617243209?text=Hola%2C+vengo+de+vivante.ar+y+quiero+cotizar+el+Plan+por+Aportes" class="btn" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 .9-1 2.3 0 1.4 1 2.7 1.2 2.9.1.2 2 3 4.7 4.1.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12 .1-6.6-5.3-11.8-11.9-11.8zm0 22c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C2.2 6.7 6.6 2.3 12 2.3c2.6 0 5.1 1 7 2.9 1.9 1.9 2.9 4.3 2.9 7 0 5.3-4.5 9.8-9.9 9.8z"/></svg>
-      Cotizar por WhatsApp
+<!-- ─── CIERRE ─────────────────────────────────────────── -->
+<section class="cierre-v2">
+  <div class="cierre-v2-inner reveal">
+    <span class="cierre-v2-label">VIVANTE · Gran Mendoza</span>
+    <h2 class="cierre-v2-headline">Si algo no te quedó claro,<br><em>seguimos por WhatsApp.</em></h2>
+    <div class="cierre-v2-rule"></div>
+    <a href="https://wa.me/5492617243209?text=Hola%2C+vengo+de+vivante.ar+y+quiero+cotizar+el+Plan+por+Aportes" class="cierre-v2-contact magnetic" target="_blank" rel="noopener">
+      +54 9 261 724-3209
     </a>
+    <span class="cierre-v2-sub">Respondemos en horario comercial · Lunes a Viernes</span>
+    <p class="cierre-v2-trust">Canal oficial PreMedic · 22 años · Gran Mendoza</p>
   </div>
 </section>
 
@@ -2920,6 +2721,16 @@ img, video { max-width: 100%; display: block; }
   </div>
 </footer>
 
+<!-- ─── STICKY MOBILE CTA BAR ──────────────────────────────── -->
+<div class="mobile-cta-bar" id="mobileCTABar" aria-hidden="true">
+  <a href="https://wa.me/5492617243209?text=Hola%2C+vengo+de+vivante.ar+y+quiero+cotizar+el+Plan+por+Aportes"
+     class="mobile-cta-bar-primary" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 .9-1 2.3 0 1.4 1 2.7 1.2 2.9.1.2 2 3 4.7 4.1.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12 .1-6.6-5.3-11.8-11.9-11.8zm0 22c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C2.2 6.7 6.6 2.3 12 2.3c2.6 0 5.1 1 7 2.9 1.9 1.9 2.9 4.3 2.9 7 0 5.3-4.5 9.8-9.9 9.8z"/></svg>
+    Cotizar gratis
+  </a>
+  <a href="#plans" class="mobile-cta-bar-secondary">Ver planes</a>
+</div>
+
 <a href="https://wa.me/5492617243209?text=Hola%2C+vengo+de+vivante.ar+y+quiero+cotizar+el+Plan+por+Aportes" class="wa-float" target="_blank" rel="noopener" aria-label="Cotizar por WhatsApp">
   <svg class="wa-float-icon" viewBox="0 0 24 24" fill="currentColor">
     <path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 .9-1 2.3 0 1.4 1 2.7 1.2 2.9.1.2 2 3 4.7 4.1.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/>
@@ -2932,6 +2743,61 @@ img, video { max-width: 100%; display: block; }
 /* ─────────────────────────────────────────────────────────────
    Premium motion runtime
    ───────────────────────────────────────────────────────────── */
+
+// Scroll progress indicator
+const scrollProgress = document.getElementById('scrollProgress');
+if (scrollProgress) {
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    scrollProgress.style.transform = `scaleX(${Math.min(pct, 1)})`;
+  }, { passive: true });
+}
+
+// Word-split hero headline
+(function() {
+  const el = document.getElementById('heroHeadline');
+  if (!el) return;
+  function splitNode(node, delay) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const words = node.textContent.split(/(\s+)/);
+      const frag = document.createDocumentFragment();
+      words.forEach((w) => {
+        if (/^\s+$/.test(w)) { frag.appendChild(document.createTextNode(w)); return; }
+        if (!w) return;
+        const span = document.createElement('span');
+        span.className = 'word';
+        span.textContent = w;
+        span.style.animationDelay = `${(delay[0] * 0.07 + 0.35)}s`;
+        delay[0]++;
+        frag.appendChild(span);
+      });
+      node.replaceWith(frag);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      Array.from(node.childNodes).forEach(child => splitNode(child, delay));
+    }
+  }
+  const delay = [0];
+  Array.from(el.childNodes).forEach(child => splitNode(child, delay));
+})();
+
+// Magnetic button effect — applied to elements with class "magnetic"
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(max-width: 768px)').matches) return;
+  document.querySelectorAll('.magnetic').forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const rect = el.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) * 0.18;
+      const dy = (e.clientY - cy) * 0.18;
+      el.style.transform = `translate(${dx}px, ${dy}px)`;
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = '';
+    });
+  });
+})();
 
 // Header shrink-on-scroll
 const header = document.getElementById('header');
@@ -2957,7 +2823,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.14, rootMargin: '0px 0px -80px 0px' });
 
-document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+document.querySelectorAll('.reveal, .reveal-stagger, .reveal-in, .reveal-fade').forEach(el => observer.observe(el));
 
 // Hero video parallax — extremely subtle, GPU-accelerated (sólo desktop)
 const heroVideoEl = document.getElementById('heroVideo');
@@ -2973,6 +2839,57 @@ if (heroVideoEl && !window.matchMedia('(prefers-reduced-motion: reduce)').matche
     lastY = window.scrollY;
     if (!raf && lastY < window.innerHeight * 1.2) raf = requestAnimationFrame(update);
   }, { passive: true });
+}
+
+// ─── Mobile nav drawer ─────────────────────────────────────────
+const navToggle  = document.getElementById('navToggle');
+const navDrawer  = document.getElementById('navDrawer');
+const navOverlay = document.getElementById('navOverlay');
+
+function openDrawer() {
+  navToggle.classList.add('open');
+  navToggle.setAttribute('aria-expanded', 'true');
+  navDrawer.classList.add('open');
+  navDrawer.setAttribute('aria-hidden', 'false');
+  navOverlay.classList.add('open');
+  navOverlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+  navToggle.classList.remove('open');
+  navToggle.setAttribute('aria-expanded', 'false');
+  navDrawer.classList.remove('open');
+  navDrawer.setAttribute('aria-hidden', 'true');
+  navOverlay.classList.remove('open');
+  navOverlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+navToggle.addEventListener('click', () => {
+  navDrawer.classList.contains('open') ? closeDrawer() : openDrawer();
+});
+navOverlay.addEventListener('click', closeDrawer);
+navDrawer.querySelectorAll('a').forEach(link => link.addEventListener('click', closeDrawer));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+// ─── Sticky mobile CTA bar ─────────────────────────────────────
+// Appears once the user scrolls past the hero bottom; hides when
+// they scroll back to the top. Body class toggles WA float position.
+const mobileCTABar = document.getElementById('mobileCTABar');
+if (mobileCTABar) {
+  const heroEl = document.getElementById('hero');
+  let barVisible = false;
+  const syncBar = () => {
+    const pastHero = heroEl.getBoundingClientRect().bottom < 0;
+    if (pastHero !== barVisible) {
+      barVisible = pastHero;
+      mobileCTABar.classList.toggle('visible', barVisible);
+      mobileCTABar.setAttribute('aria-hidden', String(!barVisible));
+      document.body.classList.toggle('bar-visible', barVisible);
+    }
+  };
+  window.addEventListener('scroll', syncBar, { passive: true });
+  syncBar();
 }
 
 // FAQ accordion (accesible — aria-expanded sincronizado)
@@ -3021,6 +2938,27 @@ if (heroVid) {
   }, 1500);
 }
 </script>
+
+<!-- ===== Evento Lead - VIVANTE (cualquier click a WhatsApp) ===== -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Detecta CUALQUIER enlace cuyo destino contenga "wa.me".
+    // No depende de clases CSS: sigue funcionando aunque cambies el
+    // diseno, agregues o quites botones de WhatsApp en el futuro.
+    // Hoy cubre los 12 CTAs de la landing (header, hero, planes,
+    // cierre, footer, barra mobile y boton flotante) de una sola vez.
+    document.querySelectorAll('a[href*="wa.me"]').forEach(function (boton) {
+      boton.addEventListener('click', function () {
+        // Solo dispara si el Pixel ya cargo (evita errores en consola).
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead');   // EL evento que optimiza tus campanas Meta.
+        }
+        // No usamos preventDefault: el link a WhatsApp se abre normal.
+      });
+    });
+  });
+</script>
+<!-- ===== Fin Evento Lead - VIVANTE ===== -->
 
 </body>
 </html>
