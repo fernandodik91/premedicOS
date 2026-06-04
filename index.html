@@ -19,7 +19,7 @@
 <meta property="og:url" content="https://vivante.ar/">
 <meta property="og:title" content="Tus aportes ya pagan una obra social. Hacé que paguen algo mejor.">
 <meta property="og:description" content="Plan por Aportes de PreMedic en Gran Mendoza: usá los aportes que ya hacés para acceder a una mejor red médica. Te asesoramos por WhatsApp.">
-<meta property="og:image" content="https://vivante.ar/og-image.jpg">
+<meta property="og:image" content="https://vivante.ar/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="VIVANTE · Plan por Aportes PreMedic en Mendoza">
@@ -28,7 +28,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tus aportes ya pagan una obra social. Hacé que paguen algo mejor.">
 <meta name="twitter:description" content="Plan por Aportes de PreMedic en Gran Mendoza. Te asesoramos por WhatsApp.">
-<meta name="twitter:image" content="https://vivante.ar/og-image.jpg">
+<meta name="twitter:image" content="https://vivante.ar/og-image.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,6 @@
 <!-- Favicon (set generado desde el isotipo) -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
 <!-- Datos estructurados: LocalBusiness -->
@@ -48,7 +47,7 @@
   "name": "VIVANTE",
   "description": "Comercializadora independiente de medicina prepaga. Canal oficial de PreMedic en Gran Mendoza. Asesoramiento en el Plan por Aportes para empleados en relación de dependencia.",
   "url": "https://vivante.ar/",
-  "image": "https://vivante.ar/og-image.jpg",
+  "image": "https://vivante.ar/og-image.png",
   "telephone": "+5492617243209",
   "email": "hola@vivante.ar",
   "areaServed": {
@@ -2277,7 +2276,7 @@ img, video { max-width: 100%; display: block; }
   .h-section { font-size: clamp(28px, 7vw, 38px); }
 
   /* PROOF — cards de prensa */
-  .press-card-image { height: 168px; }
+  .press-card-image { max-height: 168px; }
   .press-card-body { padding: 22px 22px 24px; }
   .press-card-source-name { font-size: 19px; }
   .press-card-title { font-size: 17px; }
@@ -3177,15 +3176,18 @@ if (heroSection
   }, { passive: true });
 }
 
-// ─── Prensa: acordeón editorial (expande la nota en el flujo, sin modales) ──
-document.querySelectorAll('.press-card-toggle').forEach((btn) => {
+// ─── Prensa: acordeón editorial unificado (ambas notas expanden / colapsan juntas) ──
+const allPressCards = document.querySelectorAll('.press-card');
+const allPressToggles = document.querySelectorAll('.press-card-toggle');
+allPressToggles.forEach((btn) => {
   btn.addEventListener('click', () => {
-    const card = btn.closest('.press-card');
-    if (!card) return;
-    const isOpen = card.classList.toggle('open');
-    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    const label = btn.querySelector('.press-card-toggle-label');
-    if (label) label.textContent = isOpen ? 'Ocultar nota' : 'Ver nota completa';
+    const willOpen = !document.querySelector('.press-card.open');
+    allPressCards.forEach(c => c.classList.toggle('open', willOpen));
+    allPressToggles.forEach(b => {
+      b.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      const label = b.querySelector('.press-card-toggle-label');
+      if (label) label.textContent = willOpen ? 'Ocultar nota' : 'Ver nota completa';
+    });
   });
 });
 </script>
