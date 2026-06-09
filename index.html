@@ -22,6 +22,7 @@
 <meta property="og:image" content="https://vivante.ar/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:alt" content="VIVANTE · Plan por Aportes PreMedic en Mendoza">
 
 <!-- Twitter / X card -->
@@ -29,27 +30,34 @@
 <meta name="twitter:title" content="Tus aportes ya pagan una obra social. Hacé que paguen algo mejor.">
 <meta name="twitter:description" content="Plan por Aportes de PreMedic en Gran Mendoza. Te asesoramos por WhatsApp.">
 <meta name="twitter:image" content="https://vivante.ar/og-image.png">
+<meta name="twitter:image:alt" content="VIVANTE · Plan por Aportes PreMedic en Mendoza">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://connect.facebook.net">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400;500&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
 <!-- Favicon (set generado desde el isotipo) -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-<!-- Datos estructurados: LocalBusiness -->
+<!-- Datos estructurados: Organization / MedicalBusiness -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": ["LocalBusiness", "MedicalBusiness"],
   "name": "VIVANTE",
   "description": "Comercializadora independiente de medicina prepaga. Canal oficial de PreMedic en Gran Mendoza. Asesoramiento en el Plan por Aportes para empleados en relación de dependencia.",
   "url": "https://vivante.ar/",
+  "logo": "https://vivante.ar/VIVANTE_isotipo_3D_4K.png",
   "image": "https://vivante.ar/og-image.png",
   "telephone": "+5492612515548",
   "email": "hola@vivante.ar",
+  "priceRange": "$",
+  "currenciesAccepted": "ARS",
+  "paymentAccepted": "Débito automático, Transferencia bancaria",
   "areaServed": {
     "@type": "AdministrativeArea",
     "name": "Gran Mendoza, Argentina"
@@ -60,9 +68,74 @@
     "addressRegion": "Mendoza",
     "addressCountry": "AR"
   },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+5492612515548",
+    "contactType": "customer service",
+    "contactOption": "TollFree",
+    "availableLanguage": "Spanish"
+  },
   "sameAs": [
     "https://instagram.com/vivante.ar",
     "https://www.facebook.com/profile.php?id=61589487702256"
+  ]
+}
+</script>
+
+<!-- Datos estructurados: FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué significa exactamente \"Plan por Aportes a costo $0\"?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Si trabajás en relación de dependencia, ya destinás el 9% de tu sueldo bruto a una obra social. Esa plata puede derivarse hacia PreMedic. En la gran mayoría de los casos, no pagás un peso extra mensualmente. Te hacemos el cálculo exacto por WhatsApp antes de cualquier trámite."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto tarda el proceso de afiliación?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PreMedic requiere documentación específica y la afiliación toma unos días hábiles. Nuestro trabajo es acompañarte en cada paso: te decimos qué documentación recopilar, te guiamos en la solicitud y hacemos el seguimiento hasta que la cobertura está activa. VIVANTE es una comercializadora independiente, canal oficial de PreMedic en Gran Mendoza — la cobertura médica corre por PreMedic, el acompañamiento corre por nosotros."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo cambiar de obra social cuando quiera?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En Argentina, el cambio de obra social se puede hacer una vez por año calendario. Por eso vale la pena tomar la decisión informado: te asesoramos sin compromiso, te mostramos lo que cubre y lo que no, y recién después definís."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Tengo que cancelar mi obra social actual?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. El cambio se hace mediante un trámite de derivación de aportes: tu empleador sigue aportando exactamente lo mismo, pero el destino pasa a ser PreMedic en lugar de tu obra social actual. No hay corte en la cobertura: la nueva entra cuando se aprueba."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Hay copagos o costos ocultos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En el Plan por Aportes, PreMedic no cobra copago en consultas de clínica médica, ginecología y pediatría. Las prácticas (estudios, ecografías, laboratorios) pueden tener copagos según la cartilla. Cuando te cotizamos, te explicamos exactamente qué cubre el plan, qué no cubre y dónde hay copagos. Si querés sin copagos en todo, los Planes 300 y 400 lo incluyen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo saben si me alcanzan los aportes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Es algo habitual y no es un problema. Cuando hablamos por WhatsApp te hacemos el cálculo exacto según tu sueldo bruto y te explicamos cómo queda tu plan antes de iniciar cualquier trámite."
+      }
+    }
   ]
 }
 </script>
@@ -2057,16 +2130,13 @@ img, video { max-width: 100%; display: block; }
   border-radius: 100px;
   backdrop-filter: blur(8px);
 }
-/* Logo: centrado vertical real + corrección óptica (el wordmark se
-   percibe alto junto a un texto de dos líneas en mayúsculas). */
 .footer-seal img {
   height: 22px;
   filter: brightness(0) invert(1);
   opacity: 0.85;
   display: block;
-  position: relative;
-  top: -0.5px;
   flex-shrink: 0;
+  align-self: center;
 }
 .footer-seal-text {
   font-family: var(--font-mono);
@@ -2078,6 +2148,7 @@ img, video { max-width: 100%; display: block; }
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-self: center;
 }
 .footer-col h4 {
   font-family: var(--font-mono);
@@ -2408,13 +2479,15 @@ img, video { max-width: 100%; display: block; }
       - hero-desktop.mp4: 1920x1080 o 1600x900
       - hero-mobile.mp4:  720x1280 o 1080x1920
     -->
+    <!--
+      iOS Safari no soporta el atributo media en <source> de video de forma
+      consistente. La fuente correcta se selecciona via JS al cargar la página
+      y al rotar el dispositivo. El src aquí es el fallback no-JS (desktop).
+    -->
     <video autoplay muted loop playsinline preload="metadata"
-           poster="hero-poster.jpg"
+           poster="og-image.png"
            onerror="this.parentElement.classList.add('no-video')">
-      <source src="hero-mobile.mp4"  type="video/mp4" media="(max-width: 768px)">
       <source src="hero-desktop.mp4" type="video/mp4">
-      <!-- Fallback al único video original si todavía no exportaste los nuevos -->
-      <source src="hero-video.mp4"   type="video/mp4">
     </video>
   </div>
 
@@ -2990,7 +3063,10 @@ img, video { max-width: 100%; display: block; }
         <p class="footer-brand-desc">Comercializadora independiente de medicina prepaga. Canal oficial de PreMedic en Gran Mendoza.</p>
         <div class="footer-seal">
           <img src="premedic_logo_white.png" alt="PreMedic" onerror="this.style.display='none'">
-          <div class="footer-seal-text">Canal oficial<br>en Mendoza</div>
+          <div class="footer-seal-text">
+            <span>Canal oficial</span>
+            <span>en Mendoza</span>
+          </div>
         </div>
       </div>
 
@@ -3125,33 +3201,42 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
 });
 
-// ─── Hero video: re-seleccionar source al cruzar breakpoint 768px ──
-// El atributo media en <source> sólo se evalúa en el load inicial. Si el
-// usuario rota el dispositivo o redimensiona, forzamos un .load() para que
-// el navegador re-evalúe y use la versión correcta (mobile vs desktop).
+// ─── Hero video: selección responsiva de fuente (iOS Safari safe) ──
+// iOS Safari no implementa el atributo media en <source> de video de
+// forma consistente. Gestionamos la fuente correcta 100% via JavaScript,
+// tanto en la carga inicial como al rotar el dispositivo.
 const heroVid = document.querySelector('.hero-video-bg video');
 const heroVideo = document.getElementById('heroVideo');
 
 if (heroVid) {
+  const MOBILE_SRC  = 'hero-mobile.mp4';
+  const DESKTOP_SRC = 'hero-desktop.mp4';
   const mqMobile = window.matchMedia('(max-width: 768px)');
-  let lastIsMobile = mqMobile.matches;
+  let activeSrc = null;
 
-  const handleViewportChange = (e) => {
-    if (e.matches !== lastIsMobile) {
-      lastIsMobile = e.matches;
-      // Re-seleccionar la <source> apropiada
+  const applyVideoSrc = (isMobile) => {
+    const target = isMobile ? MOBILE_SRC : DESKTOP_SRC;
+    if (target === activeSrc) return;
+    activeSrc = target;
+    const sourceEl = heroVid.querySelector('source');
+    if (sourceEl) {
+      sourceEl.src = target;
       try { heroVid.load(); heroVid.play().catch(() => {}); } catch (_) {}
     }
   };
-  // Soporte addEventListener moderno + fallback Safari viejo
-  if (mqMobile.addEventListener) mqMobile.addEventListener('change', handleViewportChange);
-  else if (mqMobile.addListener) mqMobile.addListener(handleViewportChange);
 
-  // Fallback robusto al gradient plate si nunca llega a tener frames
+  // Selección inicial — antes de que el navegador use el src por defecto
+  applyVideoSrc(mqMobile.matches);
+
+  // Rotación / redimensionado (iPad, split-screen, etc.)
+  if (mqMobile.addEventListener) mqMobile.addEventListener('change', e => applyVideoSrc(e.matches));
+  else if (mqMobile.addListener)  mqMobile.addListener(e => applyVideoSrc(e.matches));
+
+  // Fallback al gradient plate si el video no carga tras 3 s (conexión lenta)
   heroVid.addEventListener('error', () => heroVideo.classList.add('no-video'));
   setTimeout(() => {
     if (heroVid.readyState < 2) heroVideo.classList.add('no-video');
-  }, 1500);
+  }, 3000);
 }
 
 // ─── Hero spotlight: luz que sigue el cursor (sólo punteros finos) ──
