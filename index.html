@@ -3754,23 +3754,29 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script>
 
-<!-- ===== Evento Lead - VIVANTE (cualquier click a WhatsApp) ===== -->
+<!-- ===== Evento Contact - VIVANTE (cualquier click a WhatsApp) ===== -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     // Detecta CUALQUIER enlace cuyo destino contenga "wa.me".
     // No depende de clases CSS, asi que sigue funcionando aunque
     // cambies el diseno, agregues o quites botones en el futuro.
+    //
+    // IMPORTANTE: el clic a WhatsApp dispara "Contact", NO "Lead".
+    // Tocar el boton no garantiza que la persona escriba el mensaje,
+    // asi que es una senal de INTENCION (upper-funnel), no una conversion.
+    // El evento "Lead" queda reservado SOLO para el envio del formulario,
+    // que si es una conversion medible en el sitio.
     document.querySelectorAll('a[href*="wa.me"]').forEach(function (boton) {
       boton.addEventListener('click', function () {
         if (typeof fbq === 'function') {
-          fbq('track', 'Lead');   // EL evento que optimiza tus campanas
+          fbq('track', 'Contact');   // intencion de contacto por WhatsApp
         }
         // No frenamos el click: WhatsApp se abre normal.
       });
     });
   });
 </script>
-<!-- ===== Fin Evento Lead - VIVANTE ===== -->
+<!-- ===== Fin Evento Contact - VIVANTE ===== -->
 
 </body>
 </html>
